@@ -1,0 +1,30 @@
+.scene__body{
+	z-index: 0;
+	overflow: hidden;
+	position: relative;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	min-height: 100vh;
+}
+
+.layer{
+	position: absolute;
+	left: -10%;
+	top: 0;
+	width: 110%;
+	height: 100%;
+}
+
+.layer_bg{
+	background: url('../../images/parralax/fonl.png') center no-repeat;
+	background-size: cover;
+	
+}
+.layer_girl{
+	left: -30%;
+	background: url('../../images/parralax/girl.png') center no-repeat;
+	background-size: contain;
+	
+}

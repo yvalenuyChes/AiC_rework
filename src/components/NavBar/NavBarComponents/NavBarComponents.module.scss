@@ -1,0 +1,158 @@
+
+@import '../../../styles/variables';
+
+.nav__list{
+	cursor: pointer;
+	position: absolute;
+
+	a{
+		color: $colorHeader;
+		transition: $commonTransition;
+
+		&:hover{
+			color: aqua;
+			transition: $commonTransition;
+		}
+	}
+}
+
+
+.nav_phones__body{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 10;
+	overflow: auto;
+	transition: .3s all ease;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0,0,0, .6);
+	top: -150%;
+}
+
+.nav_phones__body.active{
+	top: 0;
+}
+
+.nav_phones__body_itemWrapper{
+	padding: 100px 0px 20px;
+}
+
+.nav_phones__body.enter{
+transform:translateY(-100%);
+}
+
+.nav_phones__body.enter-done{
+transform:translateY(0);
+}
+
+.nav_phones__body.enter-active{
+transition: all 500ms ease;
+transform:translateY(0);
+}
+
+.nav_phones__body.exit{
+transform:translateY(-100%);
+transition: all 500ms ease;
+}
+
+.navMobileLink a{
+	color: #fff;
+	font-size: 18px;
+}
+.nav_phones__body_item {
+	text-align: center;
+}
+
+.nav_phones__body_item a{
+    z-index: 998;
+    font-size: 20px;
+    color: #fff;
+    font-family: "Oswald",sans-serif;
+}
+
+
+
+/*  here will be auth/ligim style   */
+
+.login{
+	color: #fff;
+	transition: all .5s ease;
+	font-size: 20px;
+	margin: 10px 0 0 0;
+	cursor: pointer;
+
+	&:hover{
+		color: #0ff;
+	}
+}
+
+#auth{
+	margin: 10px 0px 0px 0px;
+	cursor: pointer;
+	font-size: 20px;
+	text-align: center;
+	color: #0ff;
+}	
+
+
+.nav__button{
+	z-index: 11;
+	position: relative;
+	height: 20px;
+	width: 30px;
+	cursor: pointer;
+}
+
+.nav__button::after,
+.nav__button::before{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	background-color: #fff;
+	transition: all .3s ease;
+}
+
+.nav__button span{
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	left: 0;
+	top: 9px;
+	background-color: #fff;
+}
+
+.nav__button::after{
+	bottom: 0;
+}
+
+.nav__button::before{
+	top: 0;
+}
+
+
+.nav__button.active span{
+	display: none;
+}
+
+.nav__button.active::after{
+	bottom: 9px;
+	transform: rotate(45deg);
+
+}
+
+.nav__button.active::before{
+	transform: rotate(-45deg);
+	top: 9px;
+}
+
+
+/* Class for body when active nav  */
+
+.blur{
+	filter: blur(5px);
+}

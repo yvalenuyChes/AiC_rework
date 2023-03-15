@@ -1,0 +1,91 @@
+@import '../../styles/_variables';
+@import '../../styles/_mixins';
+
+.header{
+	margin: $indent;
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	flex-direction:column;
+	justify-content: center;
+
+	&__text{
+		color:white;
+		right: 15%;
+		position: absolute;
+		font-size: calc(16px + 7 * ((100vw - 320px) / (1280 - 320)));
+	}
+
+	&__squere{
+		right: 10%;
+		top: 120px;
+		position: absolute;
+		height: 300px;
+		width: 400px;
+		background: url(../../images/squere-header.svg) no-repeat;
+		@include commonImageSize(contain);
+
+	}
+}
+
+.wave{	
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+	height: 150px;
+	background: url(../../images/wave.png) no-repeat;
+	@include commonImageSize(cover);
+}
+
+.fonPhone{
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: url(../../images/fonforphones.jpg) no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+@media(max-width: 1000px){
+
+	.header__text{
+		width: 200px;
+		top: 47%;
+		left: 50%;
+		transform:translate(-50%, -50%);
+	}
+
+	.header__squere{
+		top: 50%;
+		left: 50%;
+		transform:translate(-50%, -50%);
+	}
+
+}
+
+@media (max-width: 768px) {
+	.header{
+		margin-bottom: 60px;
+	}
+}
+
+@media (max-width: 400px) {
+	.header__squere{
+		height: 200px !important;
+		width: 250px !important;
+	}
+}
+
+@media (max-width: 300px) {
+	.header__squere{
+		height: 170px !important;
+		width: 220px !important;
+	}
+	
+}
+
+
+

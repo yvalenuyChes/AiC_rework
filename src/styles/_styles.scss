@@ -1,0 +1,14 @@
+@import 'nullstyle.scss';
+
+html {
+   scroll-behavior: smooth;
+ }
+ 
+ html,
+ body{
+  font-family: 'Source Sans Pro', sans-serif;
+ }
+
+.bodyLock{
+	overflow: hidden;
+}

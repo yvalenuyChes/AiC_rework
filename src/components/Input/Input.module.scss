@@ -1,0 +1,42 @@
+.input__box_order_ticket{
+	margin-top: 20px;
+	position: relative;
+	display: flex;
+	height: 70px;
+	width: 200px;
+	justify-content: center;
+}
+
+.focus_for_order .label_order_ticket{
+	color: #000;
+	transform: translateY(-30px);
+	font-size: 14px;
+	
+}
+.input_order_ticket{
+	z-index: 5;
+   display: block;
+   width: 100%;
+   position: relative;
+   height: 50px;
+   background-color: rgba(142, 255, 242 , 0); 
+   font-size: 16px;
+   border: none;
+   outline: none;
+   border-bottom: 1px solid cornflowerblue;
+   padding: 12px 14px;
+   box-sizing: border-box;
+   margin-bottom: 22px;
+   color: cornflowerblue;
+   outline: none;
+}
+
+.label_order_ticket{
+   z-index: 4;
+	color: cornflowerblue;
+	transition: .3s;
+	position: absolute;
+	line-height: 50px;
+	font-size: 18px;
+	left: 0;
+}

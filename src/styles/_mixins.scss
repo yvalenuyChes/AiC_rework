@@ -1,0 +1,54 @@
+@import '_variables';
+
+@mixin commonImageSize($size) {
+	background-position: center;
+	background-size: $size;
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+ $addSize: $pcSize - $mobSize;
+ $maxWidthForFont: $maxWidthForFont - 320;
+ font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthForFont}));
+}
+
+@mixin container {
+	max-width: $maxWidth;
+	margin: 0 auto;
+	padding: 0px 20px 100px 20px;
+}
+
+@mixin commonButton() {
+		transition: ease .5s all;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #339999;
+		width: 200px;
+		line-height: 50px;
+		border-radius: 10px;
+		box-shadow: 0 10px 10px rgba(0, 0, 0, .5);
+
+		&:hover{
+			background-color: aqua;
+			transition: ease .5s all;
+		}
+
+		a{
+			color: #fff;
+		}
+}
+
+@mixin title($color, $fontSize) {
+	padding: $titlePadding;
+	color:$color;
+	font-family: 'Oswald', sans-serif;
+   font-size: $fontSize;
+	text-align: center;
+}
+
+@mixin cardImg {
+	color:white;
+	background-size: cover;
+	background-position: center; 
+}
