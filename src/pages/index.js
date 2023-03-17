@@ -4,6 +4,7 @@ import  Header  from '@/containers/Header/Header'
 import  Footer  from '@/containers/Footer/Footer'
 import Advantages from '@/containers/AdvantagesBlock/AdvantagesBlock'
 import CountrieBlock from '@/containers/CountriesBlock/CountriesBlock'
+import OrderTicket from '@/containers/OrderTicket/OrderTicket'
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <MainPage>
         <Header/>
         <CountrieBlock/>
+        <OrderTicket/>
         <Advantages/>
         <Footer/>
       </MainPage>

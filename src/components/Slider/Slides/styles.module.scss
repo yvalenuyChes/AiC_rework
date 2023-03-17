@@ -1,0 +1,156 @@
+.container{
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.slider {
+   position: relative;
+   overflow: hidden;
+
+ }
+
+ .slider__wrapper {
+   display: flex;
+   transition: transform 0.6s ease;
+ }
+
+ .slider__item {
+   padding: 100px 0;
+   flex: 0 0 100%;
+   max-width: 100%;
+ }
+
+
+.orderToor__body{
+	margin: 50px 0 100px 0;
+}
+
+
+
+.orderToor__title{
+	width: 100%;
+	text-align: center;
+}
+
+.orderForm{
+	margin: 0 auto;
+	width: 100%;
+}
+
+.inputWrapper{
+	width: 30%;
+}
+
+.orderButton{
+	button{
+		border-radius: 20px;
+		margin: 0 auto;
+		width: 200px;
+		margin-top: 80px;
+	}
+}
+
+
+.orderToorBlock{
+	display: flex;
+	justify-content: space-between;
+}
+
+.tabOrder{
+	background-color: rgba(255, 255, 255, .4);
+	border-radius: 50%;
+	width: 170px;
+}
+
+.fas{
+	padding: 0 0 0 10px;
+}
+.selectCountrie{
+	margin: 0 auto; 
+	width: 60%;
+	display: flex;
+	justify-content: space-between;
+	overflow: hidden;
+}
+
+.slider__title{
+	margin-top: -80px;
+	padding: 0;
+	font-size: 40px;
+	padding-bottom: 40px;
+	text-align: center;
+	color: black;
+}
+
+
+.sliderLabelText{
+	color:#000;
+}
+.selectCountrie{
+
+	label{
+		font-size: 16px;	
+	}
+}
+
+.selectCountrie select{
+	background-color: rgba(255, 255, 255, .7);
+	padding: 0 0 0 30px;
+	text-align: center;
+	border-radius: 5px;
+	color: royalblue;
+	height: 40px;
+
+}
+
+
+.slider__itemFirst{
+	height: 100%;
+	background-position: center;
+	background-size: cover;
+}
+
+.slider__itemSecond{
+	background-position: center;
+	background-size: cover;
+}
+
+.slider__itemThird{
+	background-position: center;
+	background-size: cover;
+}
+
+
+
+
+ @media (max-width: 700px){
+
+ 	.selectCountrie{
+ 		flex-direction: column;
+ 	}
+
+
+ 	.slider__item{
+ 		max-height: 430px;
+ 		overflow: auto;
+ 	}
+	.orderToorBlock{
+		flex-direction:column;
+		justify-content: center;
+		align-items: center;
+	}
+} 
+
+
+.tabButton{
+	text-align: center;
+	
+	button{
+		color: white;
+		background: #298cad;
+		font-size: 18px;
+		text-transform: uppercase;
+		line-height: 48px;
+	}
+}
