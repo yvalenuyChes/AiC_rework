@@ -1,0 +1,29 @@
+.footer__apps{
+   height: 100%;
+   text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+
+.footer__title{
+   color:#fff;
+   font-size: calc(15px + 8 * ((100vw - 320px) / (1280 - 320)));
+   padding: 0px 0px 20px 0px;
+   font-family: 'Oswald', sans-serif;
+}
+
+.appleApp, 
+.googleApp{
+   border-radius: 10px;
+   margin: 10px auto;
+   width: 160px;
+   height: 50px;
+   img{
+      border-radius: 10px;
+      height: 100%;
+      width: 100%;
+   }
+}

@@ -11,8 +11,7 @@ import {
 	ABOUT_COMPANY_THIRD_ITEM,
 	ABOUT_COMPANY_FOURTH_ITEM,
 	ABOUT_COMPANY_FIFTH_ITEM
-} from '../footerComponents/footerLinkText'
-
+} from '../../FooterComponents/FooterLinksText/FooterLinksText'
 export function forTootists() {
 	return (
 		<ul className="accordionList">

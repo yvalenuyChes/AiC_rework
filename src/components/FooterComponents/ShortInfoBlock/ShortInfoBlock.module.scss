@@ -1,0 +1,130 @@
+
+.footer__shortInfoBlock{
+   flex: 1 1 40%;
+   position: relative;
+   font-size: calc(12px + 5 * ((100vw - 320px) / (1280 - 320)));
+}
+
+.footer__logo{
+   display: block;
+   margin: 10px;
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   background: url('../../../images/logo-bottom.png') no-repeat;
+   background-size: cover;
+   background-position: center;
+
+}
+
+.footer__text{
+   padding: 20px;
+   border-top: 2px solid white;
+   border-right: 2px solid white;
+   border-bottom: 2px solid white;
+   text-align: right;
+   p{
+      padding: 60px 0px 0px 0px;
+   }
+}
+
+.copyraiting{
+   padding: 0px 20px 0 0;
+   position: absolute;
+   right: 0;
+   bottom: 10%;
+}
+
+.footer__socialLinks{
+   width: 150px;
+   bottom: 10%;
+   position: absolute;		
+   display: flex;
+   justify-content: space-between;
+
+      .socialLink{
+   svg{
+      color: white;
+      height: 35px;
+      width: 35px;
+      }
+   } 
+}
+
+.footer__telephone{
+   padding: 20px 0;
+   color: white;
+}
+
+
+// Icons
+
+.vk{
+   svg{
+      transition: .3s ease;
+      &:hover{
+         color: dodgerblue;
+      }
+   }
+  
+}
+
+.twitter{
+   svg{
+      transition: .3s ease;
+      &:hover{
+         color: lightskyblue;
+      }
+   }
+}
+
+.instagram{
+   svg{
+      transition: .3s ease;
+      &:hover{
+         color:darkmagenta;
+      }
+   }
+}
+
+// adaptive
+
+@media(max-width: 1180px){
+.footer__logo{
+  display: none;
+} 
+
+.footer__socialLinks{
+  width: 130px;
+}
+}
+
+@media (max-width:1000px) {
+      .footer__bottom{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      }
+
+   .footer__text{
+      padding-bottom: 0;
+      border: none;
+      text-align: center;
+
+      p{
+         padding-top: 10px;
+      }
+   }
+
+   .copyraiting{
+      padding: 30px 0px 0px 0px;
+      position: static;
+      order: 2;
+   }
+
+   .footer__socialLinks{
+      order: 1;
+      position: static;
+   }
+}

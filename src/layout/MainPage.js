@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import ButtonToTop from '../components/ButtonToTop/ButtonToTop'
-
 import NavBar from '../components/NavBar/NavBar'
+
+
+import styles from './styles.module.scss'
+
 export default function MainPage({ children }) {
 
 	const [scrolling, toggleScrolling] = useState(false)
@@ -33,12 +36,11 @@ export default function MainPage({ children }) {
 	return (
 		<>
 			{scrolling ? null : <NavBar />}
-			<div className="wrapper">
-				<main>
+
+				<main className={styles.wrapper}>
 					{children}
 				</main>
 				<ButtonToTop />
-			</div>
 		</>
 	)
 }

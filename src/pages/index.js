@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import MainPage from '@/layout/MainPage'
 import  Header  from '@/containers/Header/Header'
-import { Footer } from '@/containers/Footer/Footer'
+import  Footer  from '@/containers/Footer/Footer'
 
 export default function Home() {
   return (

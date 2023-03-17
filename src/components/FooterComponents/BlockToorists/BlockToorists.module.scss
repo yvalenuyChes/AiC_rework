@@ -1,0 +1,23 @@
+@import '../../../styles/_variables.scss';
+
+
+.footer__title{
+   color:#fff;
+   font-size: calc(15px + 8 * ((100vw - 320px) / (1280 - 320)));
+   padding: 0px 0px 20px 0px;
+   font-family: 'Oswald', sans-serif;
+}
+
+.footer__list{
+   font-size: calc(12px + 5 * ((100vw - 320px) / (1280 - 320)));
+}
+
+.footer__list_item a{
+   color: black;
+   transition: $commonTransition;
+
+   &:hover{
+      color: #fff;
+		transition: $commonTransition;
+   }
+}

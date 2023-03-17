@@ -1,33 +1,25 @@
 import HeaderScene from "../../components/HeaderScene/HeaderScene"
-// import useWindowWidth from "../costomReactHooks/getWindowWidth"
+import useWindowWidth from "../../custumHooks/useWindowWidth"
 import styles from './Header.module.scss'
 
 
 function Header() {
 
-	//! const width = useWindowWidth()
+	const width = useWindowWidth()
 
-	// function shouldBodyLock() {
-	// 	if (bodyLock) {
-	// 		document.body.classList.add('bodyLock')
-	// 	} else {
-	// 		document.body.classList.remove('bodyLock')
-	// 	}
-	// }
 	return (
 		<header
 			className={styles.header}
 			id="header"
 		>
-			{/* {width > 1000
+			{width > 1000
 				? (
 					<>
 						<HeaderScene />
 						<div className={styles.wave} />
 					</>
 				)
-				: <div className={styles.fonPhone} />} */}
-         <HeaderScene />
+				: <div className={styles.fonPhone} />}
 			<div className={styles.header__text}>
 				<div className={styles.header__title}>
 					<h2>Мы покажем тебе удивительный мир!
