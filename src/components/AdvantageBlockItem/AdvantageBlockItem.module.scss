@@ -1,0 +1,33 @@
+.advantages__item{
+	text-align: center;
+	padding: 0 20px;
+	justify-self: center;
+	align-self: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 300px;
+	width: 300px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
+
+	&_title{
+	font-family: "Oswald",sans-serif;
+	font-size: 24px;
+	}
+
+	&_subtitle{
+	padding-top: 20px;
+  font-size: 18px;
+	}
+
+	&_img{
+	padding-top: 10%;
+	height: 80px;
+	width: 80px;}
+
+	img{
+		height: 100%;
+		width: 100%;
+	}
+}

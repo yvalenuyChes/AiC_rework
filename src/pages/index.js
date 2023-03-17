@@ -2,6 +2,7 @@ import Head from 'next/head'
 import MainPage from '@/layout/MainPage'
 import  Header  from '@/containers/Header/Header'
 import  Footer  from '@/containers/Footer/Footer'
+import Advantages from '@/containers/AdvantagesBlock/AdvantagesBlock'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       </Head>
       <MainPage>
         <Header/>
+        <Advantages/>
         <Footer/>
       </MainPage>
     </>

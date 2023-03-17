@@ -1,0 +1,7 @@
+@media (max-width:767px) {
+	.advantagesBlock__body{
+	grid-template-columns: 1fr !important;
+  grid-template-rows: 1fr !important;
+	grid-gap: 20px 0px !important;
+}
+}

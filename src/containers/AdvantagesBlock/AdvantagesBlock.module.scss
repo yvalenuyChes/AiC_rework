@@ -1,0 +1,18 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+@import './AdvantagesBlockAdaptive.module.scss';
+
+.advantagesBlock{
+	@include container;
+
+	&__title{
+		@include title(black, 30px);
+	}
+
+	&__body{
+		display: grid;
+  	grid-template-columns: 400px 400px;
+  	grid-template-rows: 400px 400px;
+		justify-content: center;
+	}
+}
