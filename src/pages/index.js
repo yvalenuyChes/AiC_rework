@@ -3,6 +3,7 @@ import MainPage from '@/layout/MainPage'
 import  Header  from '@/containers/Header/Header'
 import  Footer  from '@/containers/Footer/Footer'
 import Advantages from '@/containers/AdvantagesBlock/AdvantagesBlock'
+import CountrieBlock from '@/containers/CountriesBlock/CountriesBlock'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       </Head>
       <MainPage>
         <Header/>
+        <CountrieBlock/>
         <Advantages/>
         <Footer/>
       </MainPage>

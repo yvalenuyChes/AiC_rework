@@ -1,0 +1,40 @@
+.main_content{
+	margin:0 0 100px 0;
+}
+
+.main_content__container{
+	max-width:1200px;
+	margin: 0 auto;
+	padding: 0px 20px 100px 20px;
+	}
+
+.main_content__text{
+	font-size: calc(15px + 7 * ((100vw - 320px) / (1280 - 320)));
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 30px 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main_content__buttPerpose{
+		transition: ease .5s all;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #339999;
+		width: 200px;
+		line-height: 50px;
+		border-radius: 10px;
+		box-shadow: 0 10px 10px rgba(0, 0, 0, .5);
+}
+
+.main_content__buttPerpose:hover{
+	background-color: aqua;
+	transition: ease .5s all;
+}
+
+.main_content__buttPerpose a{
+	color: #fff;
+}

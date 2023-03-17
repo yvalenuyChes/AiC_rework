@@ -1,0 +1,22 @@
+.flexWrapper{
+	display: flex;
+}
+
+.imgGallary{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 10px 5px;
+  grid-template-areas:
+    "niderlands niderlands"
+    "maldives vengria"
+    "mram mram"
+    "newYork kanada";
+}
+
+.niderlands { grid-area: niderlands; }
+.maldives { grid-area: maldives; }
+.vengria { grid-area: vengria; }
+.mram { grid-area: mram; }
+.NY { grid-area: NY; }
+.kanada { grid-area: kanada; }
