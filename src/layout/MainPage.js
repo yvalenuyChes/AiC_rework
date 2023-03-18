@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import ButtonToTop from '../components/ButtonToTop/ButtonToTop'
 import NavBar from '../components/NavBar/NavBar'
 
@@ -6,6 +7,8 @@ import NavBar from '../components/NavBar/NavBar'
 import styles from './styles.module.scss'
 
 export default function MainPage({ children }) {
+
+	const navOpen = useSelector(state => state.navOpen.navOpen)
 
 	const [scrolling, toggleScrolling] = useState(false)
 	let [lastScrolling, toggleLastScrolling] = useState(0)
@@ -28,6 +31,12 @@ export default function MainPage({ children }) {
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
+		const wrapper = document.querySelector(`.${styles.wrapper}`)
+		if(navOpen){
+			wrapper.classList.add(`${styles.blur}`)
+		}else{
+			wrapper.classList.remove(`${styles.blur}`)
+		}
 		return () => {
 			window.removeEventListener('scroll', handleScroll)
 		}

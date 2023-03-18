@@ -15,7 +15,11 @@ export default function AccordionBlock({ title, content }) {
 				role="button"
 				tabIndex={0}
 			>
-				<div className={active ? `${styles.accordion__arrow + ' ' + styles.active}`: `${styles.accordion__arrow}`} />
+				<div className={
+					active 
+					? `${styles.accordion__arrow + ' ' + styles.active}`
+					: `${styles.accordion__arrow}`
+					} />
 				<h3>{title}</h3>
 			</div>
 			<div className={styles.accordion__content}>

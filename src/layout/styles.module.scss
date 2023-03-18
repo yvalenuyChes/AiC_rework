@@ -1,1 +1,7 @@
-.wrapper{}
+.wrapper{
+   display: block;
+}
+
+.blur{
+   filter: blur(5px);
+}

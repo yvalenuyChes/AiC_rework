@@ -20,3 +20,30 @@
 .mram { grid-area: mram; }
 .NY { grid-area: NY; }
 .kanada { grid-area: kanada; }
+
+
+
+// ADAPTIVE
+
+@media (max-width:767px) {
+	.main_content__text{
+		flex-direction: column;
+	}
+
+.main_content__subtitle{
+	padding: 20px 0px;
+}
+
+	.imgGallary{
+		overflow: hidden;
+		grid-template-columns: 1fr !important;
+		grid-template-rows: repeat(6, 1fr) !important;
+		grid-template-areas:
+			"niderlands"
+			"maldives"
+			"vengria"
+			"mram"
+			"newYork"
+			"kanada" !important;
+	}
+}

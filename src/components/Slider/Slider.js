@@ -1,8 +1,6 @@
 import Slider from 'react-slick'
+import Slide from './Slides/Slide'
 import styles from './SliderStyles.module.scss'
-import BusTicketForm from './Slides/Bus'
-import TrainTicketForm from './Slides/Train'
-import PlaneTicketForm from './Slides/Plane'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
@@ -18,15 +16,15 @@ export default function SliderBlock() {
 	return (
 		<div className={styles.slider}>
 			<Slider {...settings}>
-				<BusTicketForm
+				<Slide
 					sliderTitle="Автобус"
 					sliderBackground={styles.slider__busBackground}
 				/>
-				<TrainTicketForm
+				<Slide
 					sliderTitle="Поезд"
 					sliderBackground={styles.slider__trainBackground}
 				/>
-				<PlaneTicketForm
+				<Slide
 					sliderTitle="Самолет"
 					sliderBackground={styles.slider__planeBackground}
 				/>

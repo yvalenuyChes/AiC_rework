@@ -11,18 +11,7 @@ export default function Input(
 		onChange
 	}
 ) {
-
-	// const [valueInput, changeValue] = useState(value)
 	const [isFocus, changeFocus] = useState(false)
-
-	// const onChange = event => {
-	// 	changeValue(event.target.value)
-	// }
-
-	// const toggleOnFocusInput = classNames({
-	// 	: true,
-	// 	'focus-for-order': isFocus || value !== ''
-	// })
 
 	return (
 		<>

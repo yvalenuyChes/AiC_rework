@@ -158,3 +158,23 @@
 .img__wrapper:hover .link{
 	opacity: 1;
 }
+
+
+@media (max-width:767px) {
+	.limiter{
+		height: 100%;
+		width: 200%;
+	}
+
+	.limiter .block_text{
+		width: 50% !important;
+	}
+
+	.limiter .countrieDesk{
+		right: 50% !important;
+	}
+
+	.limiter .link{
+		right: 50%;
+	}
+}

@@ -21,7 +21,11 @@ export default function MainContentImg({ limiter, imgSrc, title, content__text_s
 	})
 
 	return (
-		<div className={`${styles.contentCountries__wrapper} ${styles.limiter}`}>
+		<div className={ 
+			limiter 
+			? `${styles.contentCountries__wrapper} ${styles.limiter}` 
+			: `${styles.contentCountries__wrapper}` 
+			}>
 			<div className={styles.img__wrapper}>
 				<div className={styles.blockImg}>
 					<Image src={imgSrc} className={styles.img_countries} alt="toorfirmImg" />
