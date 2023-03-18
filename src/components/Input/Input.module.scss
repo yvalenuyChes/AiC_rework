@@ -5,6 +5,13 @@
 	height: 70px;
 	width: 200px;
 	justify-content: center;
+
+	input[type=date]:required:invalid::-webkit-datetime-edit {
+		color: transparent;
+  }
+  input[type=date]:focus::-webkit-datetime-edit {
+		color: black !important;
+  }
 }
 
 .focus_for_order .label_order_ticket{
@@ -40,3 +47,4 @@
 	font-size: 18px;
 	left: 0;
 }
+
