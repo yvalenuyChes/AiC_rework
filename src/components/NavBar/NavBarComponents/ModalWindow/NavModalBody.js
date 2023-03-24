@@ -1,15 +1,44 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/dist/client/router'
+import Cookies from 'universal-cookie'
+import axios from "axios"
 import Link from 'next/link'
-// import { signin, authenticate } from '../../../../actions/auth'
 import Input from '../../../Input/Input'
 import { togglePopup } from '@/redux/slices/openPopup'
 import styles from './NavModalBody.module.scss'
 
 function ModalBody() {
 
-	// const router = useRouter()
+	const router = useRouter()
+
+	const cookies = new Cookies()
+
+
+	async function login(){
+		 const configuration = {
+			 method: "post",
+			 url: "http://localhost:3000",
+			 data: {
+				email,
+				password,
+			 },
+		 }
+		 axios(configuration)
+		 .then(result => {
+			 cookies.set('TOKEN', result.data.token, {
+				 path:'/',
+			 })
+		 })
+		 .catch(err => console.log(err))
+ 
+	 }
+	
+   const handleSubmit = event => {
+      event.preventDefault()
+      login()
+		router.push('/')
+   }
 
 	const dispatch = useDispatch()
 
@@ -29,27 +58,6 @@ function ModalBody() {
       })
    }
 
-
-	// function handleSubmit(event) {
-   //    event.preventDefault()
-
-   //    setValues({ ...values, loading: true, error: false })
-   //    const user = { email, password }
-
-   //    signin(user).then(data => {
-   //       if (data.error) {
-   //          setValues({ ...values, error: data.error, loading: false })
-   //          console.log(data.error);
-   //       } else {
-   //          authenticate(data, () => {
-	// 				router.push(`/`)
-   //          })
-
-   //       }
-   //    })
-
-   // }
-
 	return (
 		<>
 			<div
@@ -68,7 +76,7 @@ function ModalBody() {
 					<form
 						method="POST"
 						className={styles.tab_form}
-						// onSubmit={handleSubmit}
+						onSubmit={handleSubmit}
 					>
 						<div className={styles.inputBox}>
 							<Input

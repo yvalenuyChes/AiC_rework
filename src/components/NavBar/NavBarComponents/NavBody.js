@@ -1,20 +1,37 @@
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Modal } from '@mui/material';
-// import { useRouter } from "next/dist/client/router"
+import Cookies from 'universal-cookie'
+import { useRouter } from "next/dist/client/router"
 import Link from 'next/link'
 import { MainPageTransitions, KanadaPageTransitions } from './navLinks'
 import AccordionBlock from '../../Accardion/Accardion'
 import ModalBody from './ModalWindow/NavModalBody'
 import { toggleNavOpen } from '@/redux/slices/openNav'
 import { togglePopup } from '@/redux/slices/openPopup'
-// import { isAuth , signout} from '../../../../actions/auth'
 import styles from './NavBarComponents.module.scss'
 
 
 
 export default function NavBody() {
 
-	// const router = useRouter()
+	const router = useRouter()
+
+	const cookies = new Cookies()
+	const [isLogin, setLogin] = useState(false)
+
+	const logout = () => {
+		cookies.remove('TOKEN', {path: '/'})
+		router.push('/')
+	}
+
+	useEffect(()=> {
+		const token = cookies.get('TOKEN')
+		if(token){
+			setLogin(true)
+		}
+	}, [isLogin])
+
 
 	const navOpen = useSelector(state => state.navOpen.navOpen)
 	const popupOpen = useSelector(state => state.openPopup.openPopup)
@@ -49,23 +66,18 @@ export default function NavBody() {
 					</Link>
 				</div>
 				<div className={`${styles.nav_phones__body_item + ' ' + styles.login}`}>
-				{/* {isAuth() ?
+				{isLogin 
+				?
 					<div
-						onClick={ () => signout(() => router.push('/'))}
+						onClick={ () => logout()}
 						id="auth"
 					>Выйти</div>
-					:
+				:
 						<div
-						onClick={() => dispatch({ type: 'OPEN_MODAL_WINDOW' }, { type: 'NAV_OPEN' })}
-						id="auth"
-					>Авторизация</div>
-				} */}
-					<div
 						onClick={ PopupHandler}
 						id="auth"
-					>Авторизация
-					</div>
-					
+					>Авторизация</div>
+				}				
 					<Modal
 						open={popupOpen}
 					>
