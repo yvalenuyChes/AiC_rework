@@ -74,6 +74,14 @@ transition: all 500ms ease;
     font-family: "Oswald",sans-serif;
 }
 
+.navMobileLink a{
+	color: #fff;
+	&:hover{
+		color: aqua;
+		transition: $commonTransition;
+	}
+}
+
 
 
 /*  here will be auth/ligim style   */
@@ -89,14 +97,6 @@ transition: all 500ms ease;
 		color: #0ff;
 	}
 }
-
-#auth{
-	margin: 10px 0px 0px 0px;
-	cursor: pointer;
-	font-size: 20px;
-	text-align: center;
-	color: #0ff;
-}	
 
 
 .nav__button{

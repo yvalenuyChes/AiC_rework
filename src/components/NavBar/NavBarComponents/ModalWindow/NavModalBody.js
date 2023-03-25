@@ -14,7 +14,6 @@ function ModalBody() {
 
 	const cookies = new Cookies()
 
-
 	async function login(){
 		 const configuration = {
 			 method: "post",
@@ -106,8 +105,8 @@ function ModalBody() {
 
 
 						<p className={styles.registration_link}>Нет аккаунта?
-						 <Link href="/registration">
-							<p className={styles.tab_linkReg}> 
+						 <Link href="/signup">
+							<p className={styles.tab_linkReg} onClick={() => dispatch(togglePopup())}> 
 						 	Зарегистируйтесь
 							</p>
 						 </Link>

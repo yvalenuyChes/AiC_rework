@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux'
 import Link from 'next/link'
+import {toggleNavOpen} from '../../../redux/slices/openNav'
+import styles from './NavBarComponents.module.scss'
 
 export function MainPageTransitions() {
 
@@ -8,16 +10,17 @@ export function MainPageTransitions() {
 	return (
 		<ul className="navMobileList">
 			<li
-				className="navMobileLink"
-				onClick={() => dispatch({ type: 'TOGGLE_NAV' })}>
+				className={styles.navMobileLink}
+				onClick={() => {dispatch(toggleNavOpen())}}
+				>
 				<Link
 					href='/'>
 						Главная
 				</Link>
 			</li>
 			<li
-				className="navMobileLink"
-				onClick={() => dispatch({ type: 'TOGGLE_NAV' })}
+				className={styles.navMobileLink}
+				onClick={() => {dispatch(toggleNavOpen())}}
 			>
 				<Link
 					href='/#toor_order'>
@@ -25,8 +28,8 @@ export function MainPageTransitions() {
 				</Link>
 			</li>
 			<li
-				className="navMobileLink"
-				onClick={() => dispatch({ type: 'TOGGLE_NAV' })}
+				className={styles.navMobileLink}
+				onClick={() => {dispatch(toggleNavOpen())}}
 			>
 				<Link
 					href='/#advantages'>
@@ -34,8 +37,8 @@ export function MainPageTransitions() {
 				</Link>
 			</li>
 			<li
-				className="navMobileLink"
-				onClick={() => dispatch({ type: 'TOGGLE_NAV' })}
+				className={styles.navMobileLink}
+				onClick={() => {dispatch(toggleNavOpen())}}
 			>
 				<Link
 					href='/#footer'>

@@ -5,7 +5,14 @@ import Link from 'next/link'
 
 import styles from './MainContentImage.module.scss'
 
-export default function MainContentImg({ limiter, imgSrc, title, content__text_subtitle, value }) {
+export default function MainContentImg({ 
+	limiter, 
+	imgSrc, 
+	title, 
+	content__text_subtitle, 
+	value, 
+	link
+}) {
 
 	const [price, setPrice] = useState()
 
@@ -38,9 +45,9 @@ export default function MainContentImg({ limiter, imgSrc, title, content__text_s
 						</div>
 					</div>
 					<Link
-						href="/toSMTH"
+						href={link ? link : '/toSmth'}
 						className={styles.link}
-					>Подробнее о стране</Link>
+					>Подробнее...</Link>
 				</div>
 			</div>
 		</div>

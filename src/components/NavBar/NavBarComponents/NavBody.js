@@ -4,7 +4,7 @@ import { Modal } from '@mui/material';
 import Cookies from 'universal-cookie'
 import { useRouter } from "next/dist/client/router"
 import Link from 'next/link'
-import { MainPageTransitions, KanadaPageTransitions } from './navLinks'
+import { MainPageTransitions } from './navLinks'
 import AccordionBlock from '../../Accardion/Accardion'
 import ModalBody from './ModalWindow/NavModalBody'
 import { toggleNavOpen } from '@/redux/slices/openNav'
@@ -52,10 +52,6 @@ export default function NavBody() {
 					/>
 				</div>
 				<div className={styles.nav_phones__body_item}>
-					<AccordionBlock
-						title="Канада"
-						content={<KanadaPageTransitions />}
-					/>
 				</div>
 				<div
 					onClick={() => dispatch(toggleNavOpen())}
