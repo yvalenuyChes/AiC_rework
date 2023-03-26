@@ -8,10 +8,16 @@ export default function Input(
 		name,
 		inputMode,
 		value,
-		onChange
+		onChange, 
+		onBlur
 	}
 ) {
 	const [isFocus, changeFocus] = useState(false)
+
+	const onBlurHandler = () => {
+		changeFocus(prev => !isFocus)
+		onBlur
+	}
 
 	return (
 		<>
@@ -31,7 +37,7 @@ export default function Input(
 					onChange={onChange}
 					value={value}
 					onFocus={() => changeFocus(prev => !isFocus)}
-					onBlur={() => changeFocus(prev => !isFocus)}
+					onBlur={onBlurHandler}
 					className={styles.input_order_ticket}
 					type={type}
 					required
