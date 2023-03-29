@@ -12,6 +12,8 @@ function ModalBody() {
 
 	const router = useRouter()
 
+	const [serverError, setServerError] = useState(null)
+
 	const cookies = new Cookies()
 
 	async function login(){
@@ -29,15 +31,17 @@ function ModalBody() {
 				 path:'/',
 			 })
 		 })
-		 .catch(err => console.log(err))
- 
+
+		 .catch(err => setServerError(err.response.data.message))
+		 .finally(() => {
+			if(!serverError) {
+				router.reload(window.location.pathname)
+			}
+		 }
+			
+		 )
 	 }
-	
-   const handleSubmit = event => {
-      event.preventDefault()
-      login()
-		router.push('/')
-   }
+
 
 	const dispatch = useDispatch()
 
@@ -55,6 +59,11 @@ function ModalBody() {
          error: false,
          [name]: event.target.value
       })
+   }
+
+	const handleSubmit = event => {
+      event.preventDefault()
+      login()
    }
 
 	return (
@@ -97,10 +106,19 @@ function ModalBody() {
 								onChange={handleChange('password')}
 							/>
 						</div>
-						<button
+						{
+							serverError
+							? <button
 							type="submit"
 							className={styles.tab_button}
-						>Войти</button>
+							disabled
+							>Войти</button>
+							:<button
+							type="submit"
+							className={styles.tab_button}
+							>Войти</button>
+						}
+						
 						<a href="##" className={styles.tab_link}>Я забыл e-mail или пароль</a>
 
 
@@ -111,6 +129,9 @@ function ModalBody() {
 							</p>
 						 </Link>
 						 </p>
+						 <div className={styles.popup__errors}>
+							{serverError}
+						 </div>
 					</form>
 				</div>
 			</div>

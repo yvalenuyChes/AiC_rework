@@ -16,10 +16,10 @@ export default function Card({ idCard, title, subtitle }) {
 					className={styles.front}
 					id={idCard}
 				>
-					<div className="card__title">{title}</div>
+					<div className={styles.card__title}>{title}</div>
 				</div>
-				<div className="back">
-					<div className="card__subtitle">{subtitle}</div>
+				<div className={styles.back}>
+					<div className={styles.card__subtitle}>{subtitle}</div>
 				</div>
 			</div>
 		</div>

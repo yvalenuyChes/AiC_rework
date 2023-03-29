@@ -20,7 +20,6 @@ export default function CountrieBlockGallery() {
 					title="Москва"
 					content__text_subtitle={NIRERLAND_TEXT}
 					value='700'
-					link={'/moscow'}
 				/>
 			</div>
 			<div className={styles.maldives}>
@@ -46,6 +45,7 @@ export default function CountrieBlockGallery() {
 					title="Санкт-Петербург"
 					content__text_subtitle={MRAM_KANYON_TEXT}
 					value='600'
+					link={'/saint_petersburg'}
 				/>
 			</div>
 			<div className={styles.newYork}>

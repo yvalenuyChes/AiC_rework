@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import useWindowWidth from '../../../custumHooks/useWindowWidth'
 import styles from './style.module.scss'
-import styles2 from '../../../pages/moscow/styles.module.scss'
+import styles2 from '../../../pages/saint_petersburg/styles.module.scss'
 
 export default function ParralaxCountries({
    page,

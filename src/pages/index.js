@@ -18,7 +18,7 @@ export default function Home() {
     if(cookies.get('TOKEN')){
       setLogin(true)
     }
-  }, [isLogin])
+  }, [])
 
   return (
     <>

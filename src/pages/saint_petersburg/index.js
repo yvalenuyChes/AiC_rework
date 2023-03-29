@@ -25,7 +25,7 @@ export default function Moscow(){
    return(
       <MainPage>
       <Head>
-         <title>Москва</title>
+         <title>Санкт-Петербург</title>
       </Head>
       <section className={styles.wrapper}>
          <ParralaxKanada />

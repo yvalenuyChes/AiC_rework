@@ -1,5 +1,6 @@
-const { useState } = require("react")
+const { useState, useEffect } = require("react")
 import Input from "@/components/Input/Input"
+import Loader from "@/components/Loader/Loader"
 import MainPage from "@/layout/MainPage"
 import axios from "axios"
 import Head from "next/head"
@@ -23,7 +24,12 @@ const signupPage = () => {
       repeatPassword:true
    })
 
+   const [loading, setLoading] = useState(false)
+
    const {name, email, password, repeatPassword  } = values
+
+   const [serverResult, setServerResult] = useState('')
+   const  [serverError, setServerError ]= useState('')
 
    const handleChange = name => event => {
       setValues({
@@ -33,8 +39,8 @@ const signupPage = () => {
    }
 
    function handleSubmit(event) {
+      setLoading(true),
       event.preventDefault()
-
       const configuration = {
          method:'post',
          url:'http://localhost:3000/signup',
@@ -46,8 +52,14 @@ const signupPage = () => {
       }
 
       axios(configuration)
-      .then(result => console.log(result))
-      .catch(err => console.log(err))
+      .then(result => 
+         setServerResult(result.data.message), 
+         setServerError(null), 
+      )
+      .catch(err => {
+         setServerError(err.response.data.message)
+      })
+      .finally(() => setLoading(false))
    }
 
 
@@ -84,6 +96,17 @@ const signupPage = () => {
          errors.repeatPassword = false
       }else{
          errors.repeatPassword = true
+      }
+   }
+
+   const handleButton = () => {
+      if(serverResult){
+         setValues({
+            email:'',
+            password:'',
+            name:'',
+            repeatPassword:''
+         })
       }
    }
 
@@ -237,8 +260,23 @@ const signupPage = () => {
                   :<button
                   type="submit"
                   className={styles.tab_button}
-                  >Зарегистрироваться</button>
+                  onClick={() => handleButton}
+                  >{loading ? <Loader/> : 'Зарегистрироваться'}</button>
                }
+                  {
+                     serverResult 
+                     ? <div 
+                        className={styles.server_response}
+                        > Вы успешно зарегистрировалсь, пожалуйста войдите в систему 
+                     </div>
+                     : null
+                     
+                  }
+                  {
+                     serverError
+                     ? <div className={`${styles.server_response + ' ' + styles.err }`}>{serverError}</div>
+                     : null
+                  }
          </form>
         
       </MainPage>

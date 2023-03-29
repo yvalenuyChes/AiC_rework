@@ -38,7 +38,7 @@ export default function MainContentImg({
 					<Image src={imgSrc} className={styles.img_countries} alt="toorfirmImg" />
 					<div className={styles.block_text}>
 						<h2 className={styles.content__title}>{title}</h2>
-						<span className={styles.content__price}>Цена за билет: {value * price} руб</span>
+						<span className={styles.content__price}>Цена за билет: от {value * price} руб</span>
 						<div className={styles.content__text}>
 							<div className={styles.content__text_title}>Предлагаем Вам посетить...</div>
 							<div className={styles.content__text_subtitleClass}>{content__text_subtitle}</div>

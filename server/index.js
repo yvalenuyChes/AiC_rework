@@ -31,6 +31,16 @@ app.prepare()
 
         server.post('/signup',  (req,res)=>{
 
+            UserSchema.findOne({email: req.body.email}).then(user=>{
+                if(user){
+                    return res.status(400).send({
+                        message: 'Email уже занят',
+                    })
+                }
+            }
+            )
+
+
             bcrypt
             .hash(req.body.password, 10)
             .then((hashedPassword)=> {

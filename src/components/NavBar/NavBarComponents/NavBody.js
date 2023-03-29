@@ -22,7 +22,7 @@ export default function NavBody() {
 
 	const logout = () => {
 		cookies.remove('TOKEN', {path: '/'})
-		router.push('/')
+		dispatch(toggleNavOpen())
 	}
 
 	useEffect(()=> {
