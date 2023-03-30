@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
+import {isAuth} from './slices/isAuth';
 import { navOpen } from './slices/openNav';
 import {openPopup} from './slices/openPopup';
 
@@ -7,7 +8,8 @@ import {openPopup} from './slices/openPopup';
   configureStore({
     reducer: {
        [navOpen.name]: navOpen.reducer,
-       [openPopup.name]: openPopup.reducer
+       [openPopup.name]: openPopup.reducer,
+       [isAuth.name]: isAuth.reducer
     },
     devTools: true,
   })

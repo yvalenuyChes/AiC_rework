@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useRouter } from 'next/dist/client/router'
+import { setAuthTrue } from '@/redux/slices/isAuth'
+import Link from 'next/link'
 import Cookies from 'universal-cookie'
 import axios from "axios"
-import Link from 'next/link'
 import Input from '../../../Input/Input'
 import { togglePopup } from '@/redux/slices/openPopup'
+
 import styles from './NavModalBody.module.scss'
 
 function ModalBody() {
-
-	const router = useRouter()
 
 	const [serverError, setServerError] = useState(null)
 
@@ -32,14 +31,13 @@ function ModalBody() {
 			 })
 		 })
 
-		 .catch(err => setServerError(err.response.data.message))
-		 .finally(() => {
-			if(!serverError) {
-				router.reload(window.location.pathname)
-			}
-		 }
+		.then(() => {
+			dispatch(setAuthTrue())
+			dispatch(togglePopup())
 			
-		 )
+		})
+
+		 .catch(err => setServerError(err.response.data.message))
 	 }
 
 
@@ -106,18 +104,10 @@ function ModalBody() {
 								onChange={handleChange('password')}
 							/>
 						</div>
-						{
-							serverError
-							? <button
-							type="submit"
-							className={styles.tab_button}
-							disabled
+							<button
+								type="submit"
+								className={styles.tab_button}
 							>Войти</button>
-							:<button
-							type="submit"
-							className={styles.tab_button}
-							>Войти</button>
-						}
 						
 						<a href="##" className={styles.tab_link}>Я забыл e-mail или пароль</a>
 

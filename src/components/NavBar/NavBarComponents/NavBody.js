@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Modal } from '@mui/material';
 import Cookies from 'universal-cookie'
-import { useRouter } from "next/dist/client/router"
 import Link from 'next/link'
 import { MainPageTransitions } from './navLinks'
 import AccordionBlock from '../../Accardion/Accardion'
@@ -10,28 +8,22 @@ import ModalBody from './ModalWindow/NavModalBody'
 import { toggleNavOpen } from '@/redux/slices/openNav'
 import { togglePopup } from '@/redux/slices/openPopup'
 import styles from './NavBarComponents.module.scss'
+import { setAuthFalse } from '@/redux/slices/isAuth';
 
 
 
 export default function NavBody() {
 
-	const router = useRouter()
 
 	const cookies = new Cookies()
-	const [isLogin, setLogin] = useState(false)
+
+	const isLogin = useSelector(state => state.isAuth.isAuth)
 
 	const logout = () => {
 		cookies.remove('TOKEN', {path: '/'})
+		dispatch(setAuthFalse())
 		dispatch(toggleNavOpen())
 	}
-
-	useEffect(()=> {
-		const token = cookies.get('TOKEN')
-		if(token){
-			setLogin(true)
-		}
-	}, [isLogin])
-
 
 	const navOpen = useSelector(state => state.navOpen.navOpen)
 	const popupOpen = useSelector(state => state.openPopup.openPopup)
@@ -57,9 +49,14 @@ export default function NavBody() {
 					onClick={() => dispatch(toggleNavOpen())}
 					className={`${styles.nav_phones__body_item}`}
 				>
-					<Link href="/personal_office">
-						Личный кабинет
-					</Link>
+					{
+						isLogin
+						? <Link href="/personal_office">
+								Личный кабинет
+						  </Link>
+						: null
+					}
+					
 				</div>
 				<div className={`${styles.nav_phones__body_item + ' ' + styles.login}`}>
 				{isLogin 

@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setAuthTrue } from '@/redux/slices/isAuth'
 import Cookies from 'universal-cookie'
 import Head from 'next/head'
 import MainPage from '@/layout/MainPage'
@@ -12,11 +14,12 @@ import OrderTicket from '@/containers/OrderTicket/OrderTicket'
 export default function Home() {
 
   const cookies = new Cookies()
+  const dispatch = useDispatch()
 
-  const [isLogin, setLogin] = useState(false)
+  const isLogin  = useSelector(state => state.isAuth.isAuth)
   useEffect(()=> {
     if(cookies.get('TOKEN')){
-      setLogin(true)
+      dispatch(setAuthTrue())
     }
   }, [])
 
