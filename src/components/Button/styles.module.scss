@@ -1,0 +1,38 @@
+.button{
+
+	height: 48px;
+	position: relative;
+   transition: ease .5s all;
+   margin: 30px auto 10px auto;
+   border: none;
+   width: 60%;
+   background: #298cad;
+   color:white;
+   font-size: 18px;
+   text-transform: uppercase;
+   display: block;
+   text-align: center;
+   line-height: 48px;
+   border-radius: 10px;
+
+	// &_disabled{
+	// 	transition: ease .5s all;
+	// 	cursor: not-allowed;
+	// 	margin: 30px auto 10px auto;
+	// 	border: none;
+	// 	width: 60%;
+	// 	color:black;
+	// 	font-size: 18px;
+	// 	text-transform: uppercase;
+	// 	display: block;
+	// 	text-align: center;
+	// 	line-height: 48px;
+	// }
+}
+
+
+
+.button:hover{
+transition: ease .5s all;
+background: rgb(35, 78, 158);
+}

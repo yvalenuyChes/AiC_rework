@@ -15,8 +15,7 @@ export default function Home() {
 
   const cookies = new Cookies()
   const dispatch = useDispatch()
-
-  const isLogin  = useSelector(state => state.isAuth.isAuth)
+  
   useEffect(()=> {
     if(cookies.get('TOKEN')){
       dispatch(setAuthTrue())
@@ -33,13 +32,7 @@ export default function Home() {
       </Head>
       <MainPage>
         <Header/>
-        <CountrieBlock/>
-        {
-          isLogin 
-          ? <OrderTicket/>
-          : null
-        }
-        
+        <CountrieBlock/> 
         <Advantages/>
         <Footer/>
       </MainPage>

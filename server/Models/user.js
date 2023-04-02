@@ -7,7 +7,13 @@ const UserSchema = new Schema({
       required:true,
       unique: [true, "email already exists in database!"],
    },
-   password: String
+   password: String,
+   tickets:[{
+      name: String,
+      personNumber: Number,
+      dateFrom: Date,
+      dateCome:Date
+   }]
 }, 
 { timestamp: true },
 )

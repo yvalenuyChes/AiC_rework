@@ -1,4 +1,4 @@
-const { useState, useEffect } = require("react")
+const { useState} = require("react")
 import Input from "@/components/Input/Input"
 import Loader from "@/components/Loader/Loader"
 import MainPage from "@/layout/MainPage"

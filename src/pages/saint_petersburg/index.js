@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import MainPage from "../../layout/MainPage"
 import useWindowWidth from '../../custumHooks/useWindowWidth'
@@ -13,10 +14,65 @@ import {
 	THIRD_TEXT_ITEM
 } from '../../components/CityPageComponents/CountriesPageText/moscow_text'
 import styles from './styles.module.scss'
+import Input from '@/components/Input/Input'
+import { Button } from '@/components/Button/Button'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+
+
 
 
 
 export default function Moscow(){
+
+
+   const isLogin = useSelector(state => state.isAuth.isAuth)
+   const [userEmail,setUserEmail] = useState('')
+
+   useEffect(()=>{
+      axios.get('http://localhost:3000/user')
+      .then(result => setUserEmail(result.data.userEmail) )
+      .catch(e => console.log(e))
+   }, [])
+
+   console.log(userEmail)
+
+   const [value, setValue] = useState({
+      personNum:'',
+      depDate: '',
+      returnDate:''
+   })
+
+   const handleChange = name => event => {
+		setValue({
+			...value,
+			[name]: event.target.value
+		})
+	}
+
+   const handleSubmit = event => {
+      event.preventDefault()
+      const configuration = {
+         method:'post',
+         url:'http://localhost:3000/saint_petersburg',
+         data:{
+            email: userEmail,
+            personNumber: personNum,
+            dateFrom: depDate,
+            dateCome: returnDate
+         }
+      }
+
+      axios(configuration)
+      .then(result => 
+         console.log(result)
+      )
+      .catch(err => {
+         console.log(err)
+      })
+   }
+
+   const {personNum, depDate, returnDate} = value
 
 
    const pageWidth = useWindowWidth()
@@ -28,11 +84,11 @@ export default function Moscow(){
          <title>Санкт-Петербург</title>
       </Head>
       <section className={styles.wrapper}>
-         <ParralaxKanada />
+         {/* <ParralaxKanada /> */}
          <div className={styles.content_paralax}>
             <div className={styles.content__body}>
                <div className={styles.content__header} id="kanada_header">
-                  <h1 className={styles.content__title}>Москва</h1>
+                  <h1 className={styles.content__title}>Санкт-Петербург</h1>
                   <h2 className={styles.content__subtitle}>Мы покажем удивительный мир канады</h2>
                </div>
                <div className={styles.content__article}>
@@ -119,6 +175,43 @@ export default function Moscow(){
 
                            }
                         </div>
+                     </div>
+                     <div className={styles.row}  >
+                           <div className={styles.col} id='order_ticketSPB' >
+                              <h3>Заказать билет</h3>
+                              <form  className={styles.ticket_order__form} onSubmit={handleSubmit} >
+                                 <Input
+                                    label={'Количество человек'}
+                                    value={personNum}
+                                    onChange={handleChange('personNum')}
+
+                                 />
+                                 <Input
+                                    type="date"
+                                    label="Отбытие"
+                                    name="departure_date_bus"
+                                    value={depDate}
+                                    onChange={handleChange('depDate')}
+                                 />
+                                 <Input
+                                    type="date"
+                                    label="Когда вернетесь"
+                                    name="return_date_bus"
+                                    value={returnDate}
+                                    onChange={handleChange('returnDate')}
+                                 />
+                                 <Button
+                                    className={
+                                       isLogin
+                                       ?   styles.button
+                                       : `${styles.button + ' ' + styles.disabled}`
+                                    }
+                                    disabled = {!isLogin}
+                                    title='Заказать билет'
+                                    type='submit'
+                                 />
+                              </form>
+                           </div>
                      </div>
                   </div>
                </div>

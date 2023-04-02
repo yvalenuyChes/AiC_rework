@@ -4,6 +4,7 @@ const next = require('next')
 const { default: mongoose } = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const cors = require('cors')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -119,10 +120,72 @@ app.prepare()
             })
         })
 
+        server.get('/user',  (req,res)=> {
+            const token = req.headers.cookie
+            const cookie = token.slice(6)
+            const decoded = jwt.decode(cookie)
+            res.status(200).send(decoded)
+        })
+
+        server.post('/saint_petersburg', (req, res)=> {
+            const ticket = {
+                name: 'Saint-Petersburg',
+                personNumber: req.body.personNumber,
+                dateFrom: req.body.dateFrom,
+                dateCome:req.body.dateCome
+            }
+            try{
+
+                UserSchema.findOneAndUpdate(
+                    {email:req.body.email }, 
+                    {$push: {tickets:ticket}}, 
+                    { upsert: true },  
+                    ).then(()=>{
+                        res.status(200).send('Updated succesfully')
+                    })
+                   
+
+            }catch(e){
+                console.log(e)
+            }
+
+          //const user =  UserSchema.findOne({email: req.body.email})
+
+        //   try{
+        //     user.tickets.push({
+        //         name: 'Saint-Petersburg',
+        //         personNumber: req.body.personNumber,
+        //         dateFrom: req.body.dateFrom,
+        //         dateCome:req.body.dateCome
+        //     }),
+        //     user.save()
+        //   }catch(err){
+        //     res.status(500).send({
+        //         message:'Something went wrong',
+        //         err
+        //        })  
+        //   }
+            // .then(user => user.tickets.push({
+            //         name: 'Saint-Petersburg',
+            //         personNumber: req.body.personNumber,
+            //         dateFrom: req.body.dateFrom,
+            //         dateCome:req.body.dateCome
+            //     }),
+            // )
+            // .catch(err => {
+            //     res.status(500).send({
+            //         message:'Something went wrong',
+            //         err
+            //     })  
+            // })
+        })
+
 
         server.get('profile', auth,  (req,res)=> {
             res.json({ message: "You are authorized to access me" })
         })
+
+        server.use(cors())
 
 
         server.use((req, res, next) => {

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import styles from './MainContentImage.module.scss'
+import { useSelector } from 'react-redux'
 
 export default function MainContentImg({ 
 	limiter, 
@@ -13,6 +14,8 @@ export default function MainContentImg({
 	value, 
 	link
 }) {
+
+	const isLogin = useSelector(state => state.isAuth.isAuth)
 
 	const [price, setPrice] = useState()
 
@@ -44,6 +47,24 @@ export default function MainContentImg({
 							<div className={styles.content__text_subtitleClass}>{content__text_subtitle}</div>
 						</div>
 					</div>
+					{
+						isLogin
+						? 
+						<Link
+							href={link ? link : '/toSmth'}
+							className={styles.link_order }
+						>
+							Заказать билет
+						</Link>
+						:
+						<button
+							className={`${styles.link_order + ' ' + styles.disabled}`
+						}
+						>
+						Заказать билет
+						</button>
+					}
+					
 					<Link
 						href={link ? link : '/toSmth'}
 						className={styles.link}
