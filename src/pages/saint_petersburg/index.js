@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
 import Head from 'next/head'
 import MainPage from "../../layout/MainPage"
 import useWindowWidth from '../../custumHooks/useWindowWidth'
@@ -13,11 +15,10 @@ import {
 	SIXTH_TEXT_ITEM,
 	THIRD_TEXT_ITEM
 } from '../../components/CityPageComponents/CountriesPageText/moscow_text'
-import styles from './styles.module.scss'
 import Input from '@/components/Input/Input'
 import { Button } from '@/components/Button/Button'
-import { useSelector } from 'react-redux'
-import axios from 'axios'
+import styles from './styles.module.scss'
+
 
 
 
@@ -30,9 +31,12 @@ export default function Moscow(){
    const [userEmail,setUserEmail] = useState('')
 
    useEffect(()=>{
-      axios.get('http://localhost:3000/user')
-      .then(result => setUserEmail(result.data.userEmail) )
-      .catch(e => console.log(e))
+      if(isLogin){
+         axios.get('http://localhost:3000/user')
+         .then(result => setUserEmail(result.data.email) )
+         .catch(e => console.log(e))
+      }
+        
    }, [])
 
    console.log(userEmail)
@@ -89,7 +93,7 @@ export default function Moscow(){
             <div className={styles.content__body}>
                <div className={styles.content__header} id="kanada_header">
                   <h1 className={styles.content__title}>Санкт-Петербург</h1>
-                  <h2 className={styles.content__subtitle}>Мы покажем удивительный мир канады</h2>
+                  <h2 className={styles.content__subtitle}>Мы покажем лучшие места этого прекрасного города</h2>
                </div>
                <div className={styles.content__article}>
                   <div className={styles.content__main}>
@@ -204,7 +208,7 @@ export default function Moscow(){
                                     className={
                                        isLogin
                                        ?   styles.button
-                                       : `${styles.button + ' ' + styles.disabled}`
+                                       :  styles.disabled
                                     }
                                     disabled = {!isLogin}
                                     title='Заказать билет'

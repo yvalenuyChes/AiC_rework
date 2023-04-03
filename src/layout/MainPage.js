@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setAuthTrue } from '@/redux/slices/isAuth'
+import Cookies from 'universal-cookie'
 import ButtonToTop from '../components/ButtonToTop/ButtonToTop'
 import NavBar from '../components/NavBar/NavBar'
 
@@ -7,6 +9,17 @@ import NavBar from '../components/NavBar/NavBar'
 import styles from './styles.module.scss'
 
 export default function MainPage({ children }) {
+
+
+	const cookies = new Cookies()
+	const dispatch = useDispatch()
+	
+	useEffect(()=> {
+	  if(cookies.get('TOKEN')){
+		 dispatch(setAuthTrue())
+	  }
+	}, [])
+
 
 	const navOpen = useSelector(state => state.navOpen.navOpen)
 

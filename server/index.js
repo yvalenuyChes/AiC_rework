@@ -124,12 +124,23 @@ app.prepare()
             const token = req.headers.cookie
             const cookie = token.slice(6)
             const decoded = jwt.decode(cookie)
-            res.status(200).send(decoded)
+            UserSchema.findOne({email:decoded.userEmail})
+            .then((result,err) => {
+                    if(result){
+                        res.status(200).send(result)
+                    }else{
+                        console.log(err)
+                    }
+                }
+            )
+           
+            
+           
         })
 
         server.post('/saint_petersburg', (req, res)=> {
             const ticket = {
-                name: 'Saint-Petersburg',
+                name: 'Санкт-Петербург',
                 personNumber: req.body.personNumber,
                 dateFrom: req.body.dateFrom,
                 dateCome:req.body.dateCome
@@ -148,43 +159,7 @@ app.prepare()
             }catch(e){
                 console.log(e)
             }
-
-          //const user =  UserSchema.findOne({email: req.body.email})
-
-        //   try{
-        //     user.tickets.push({
-        //         name: 'Saint-Petersburg',
-        //         personNumber: req.body.personNumber,
-        //         dateFrom: req.body.dateFrom,
-        //         dateCome:req.body.dateCome
-        //     }),
-        //     user.save()
-        //   }catch(err){
-        //     res.status(500).send({
-        //         message:'Something went wrong',
-        //         err
-        //        })  
-        //   }
-            // .then(user => user.tickets.push({
-            //         name: 'Saint-Petersburg',
-            //         personNumber: req.body.personNumber,
-            //         dateFrom: req.body.dateFrom,
-            //         dateCome:req.body.dateCome
-            //     }),
-            // )
-            // .catch(err => {
-            //     res.status(500).send({
-            //         message:'Something went wrong',
-            //         err
-            //     })  
-            // })
         })
-
-
-        server.get('profile', auth,  (req,res)=> {
-            res.json({ message: "You are authorized to access me" })
-        })
-
         server.use(cors())
 
 

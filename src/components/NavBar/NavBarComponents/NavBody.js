@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Modal } from '@mui/material';
 import Cookies from 'universal-cookie'
 import Link from 'next/link'
-import { MainPageTransitions } from './navLinks'
+import { MainPageTransitions } from './NavLinks'
 import AccordionBlock from '../../Accardion/Accardion'
 import ModalBody from './ModalWindow/NavModalBody'
 import { toggleNavOpen } from '@/redux/slices/openNav'
@@ -51,7 +51,7 @@ export default function NavBody() {
 				>
 					{
 						isLogin
-						? <Link href="/personal_office">
+						? <Link href="/profile">
 								Личный кабинет
 						  </Link>
 						: null

@@ -142,21 +142,26 @@
 
 	.button{
 		width: 200px;
+	}
 
-		&.disabled{
-			display: block;
-			width: 200px;
-			transition: ease .5s all;
-			cursor: not-allowed;
-			margin: 30px auto 10px auto;
-			border: none;
-			width: 60%;
-			color:black;
-			font-size: 18px;
-			text-transform: uppercase;
-			display: block;
-			text-align: center;
-			line-height: 48px;
+	.disabled{
+		display: block !important;
+		width: 200px !important;
+		background: rgb(234, 234, 234);
+		transition: ease .5s all;
+		cursor: not-allowed;
+		margin: 30px auto 10px auto;
+		border: none;
+		width: 60%;
+		color:black;
+		font-size: 18px;
+		text-transform: uppercase;
+		display: block;
+		text-align: center;
+		line-height: 48px;
+
+		&:hover{
+			background: none;
 		}
 	}
 }
