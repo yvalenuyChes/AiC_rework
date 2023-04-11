@@ -12,7 +12,8 @@ export default function MainContentImg({
 	title, 
 	content__text_subtitle, 
 	value, 
-	link
+	link,
+	orderLink
 }) {
 
 	const isLogin = useSelector(state => state.isAuth.isAuth)
@@ -51,7 +52,7 @@ export default function MainContentImg({
 						isLogin
 						? 
 						<Link
-							href={link ? link : '/toSmth'}
+							href={orderLink ? orderLink : '/toSmth'}
 							className={styles.link_order }
 						>
 							Заказать билет

@@ -12,7 +12,8 @@ const UserSchema = new Schema({
       name: String,
       personNumber: Number,
       dateFrom: Date,
-      dateCome:Date
+      dateCome:Date,
+      price: Number
    }]
 }, 
 { timestamp: true },

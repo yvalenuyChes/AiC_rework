@@ -9,7 +9,12 @@ export default function Input(
 		inputMode,
 		value,
 		onChange, 
-		onBlur
+		onBlur,
+		min,
+		max,
+		disabled,
+		readOnly,
+		required
 	}
 ) {
 	const [isFocus, changeFocus] = useState(false)
@@ -40,7 +45,11 @@ export default function Input(
 					onBlur={onBlurHandler}
 					className={styles.input_order_ticket}
 					type={type}
-					required
+					required = {required}
+					min={min}
+					max={max}
+					disabled = {disabled}
+					readOnly={readOnly}
 				/>
 			</div>
 		</>

@@ -6,7 +6,8 @@ export const Ticket = ({
    city,
    personNumber,
    dateFrom,
-   dateCome
+   dateCome,
+   price
 }) =>{
    return(
       <div className={styles.ticket} >
@@ -16,6 +17,7 @@ export const Ticket = ({
             <div className={styles.ticket__date_from} >{moment(dateFrom).utc().format('DD-MM-YYYY')} </div>
             <div className={styles.ticket__date_come} >{moment(dateCome).utc().format('DD-MM-YYYY')} </div>
          </div>   
+         <div className={styles.ticket__price} >Цена: {price}</div>
       </div>
    )
 }

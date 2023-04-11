@@ -1,17 +1,18 @@
-@import '../../styles/mixins';
+@import '../../../styles/mixins';
 
 .container{
-	padding-top: 100px;
-	width: 500px;
 	margin: 0 auto;
 	position: relative;
 }
 
 .errorsField{
+	padding: 40px;
+	background-color: #fff;
 	height: 100%;
 	width: 300px;
 	position: absolute;
-	left: -50%;
+	left: -100%;
+	top: 0;
 	border: 3px solid rgba(213, 212, 212, .3);
 	border-radius: 10px;
 
@@ -22,7 +23,6 @@
 	}
 
 	&__container{
-		width: 200px;
 		margin: auto;
 		padding: 40px 0 20px 0;
 	}
@@ -149,10 +149,11 @@
    transition: ease .5s all;
    margin: 30px auto 10px auto;
    border: none;
-   width: 60%;
+	border-radius: 10px;
+   width: 200px;
    background: #298cad;
    color:white;
-   font-size: 18px;
+   font-size: 14px;
    text-transform: uppercase;
    display: block;
    text-align: center;
@@ -163,9 +164,10 @@
 		cursor: not-allowed;
 		margin: 30px auto 10px auto;
 		border: none;
-		width: 60%;
+		border-radius: 10px;
+		width: 200px;
 		color:black;
-		font-size: 18px;
+		font-size: 14px;
 		text-transform: uppercase;
 		display: block;
 		text-align: center;

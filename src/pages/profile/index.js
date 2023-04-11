@@ -55,6 +55,7 @@ export default function Profile(){
                               personNumber={ticket.personNumber}
                               dateFrom={ticket.dateFrom}
                               dateCome={ticket.dateCome}
+                              price={ticket.price}
                            />
                         )
                      })

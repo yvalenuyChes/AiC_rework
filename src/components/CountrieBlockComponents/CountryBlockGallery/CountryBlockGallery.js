@@ -46,6 +46,7 @@ export default function CountrieBlockGallery() {
 					content__text_subtitle={MRAM_KANYON_TEXT}
 					value='600'
 					link={'/saint_petersburg'}
+					orderLink={'/saint_petersburg#order_ticketSPB'}
 				/>
 			</div>
 			<div className={styles.newYork}>

@@ -78,7 +78,7 @@ app.prepare()
         })
 
 
-        server.post('/', (req,res)=>{
+        server.post('/login', (req,res)=>{
             UserSchema.findOne({email:req.body.email})
             .then(user => {
                 bcrypt.compare(req.body.password, user.password)
@@ -143,7 +143,8 @@ app.prepare()
                 name: 'Санкт-Петербург',
                 personNumber: req.body.personNumber,
                 dateFrom: req.body.dateFrom,
-                dateCome:req.body.dateCome
+                dateCome:req.body.dateCome,
+                price: req.body.price
             }
             try{
 

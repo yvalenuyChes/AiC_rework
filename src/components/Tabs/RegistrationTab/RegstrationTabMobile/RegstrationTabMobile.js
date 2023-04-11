@@ -1,12 +1,10 @@
-const { useState} = require("react")
+import  { useState } from 'react'
 import Input from "@/components/Input/Input"
 import Loader from "@/components/Loader/Loader"
-import MainPage from "@/layout/MainPage"
-import axios from "axios"
-import Head from "next/head"
 import styles from './styles.module.scss'
 
-const signupPage = () => {
+export const RegstrationTabMobile = () => {
+
    const [accept, setAccept] = useState(false)
 
    const [values, setValues] = useState({
@@ -112,88 +110,11 @@ const signupPage = () => {
 
  
 
-
-
    return(
-      <MainPage>
-         <Head>
-             <title>Регистрация</title>
-         </Head>
-         
          <form
-            method="POST"
-            onSubmit={handleSubmit}
-            className={styles.container}
+         method='POST'
          >
-            <div className={styles.errorsField} >
-               <div className={styles.errorsField__container}>
-                  <h3 className={styles.errorsField__title} > Заполните поля формы</h3>
-                  <div className={
-                     `
-                     ${
-                        errors.email
-                        ? styles.errorsField__item + ' ' + styles.errors
-                        : styles.errorsField__item
-                     }
-                     
-                     `
-                     }>Электронная почта
-                     {
-                        errors.email
-                        ? null
-                        : <span className={styles.errorsField__item_tip}/>
-                     }
-                     
-                     </div>
-                  <div className={`
-                 ${
-                  errors.name
-                  ? styles.errorsField__item + ' ' + styles.errors
-                  : styles.errorsField__item
-                 }
-                 `}>Имя
-                 {
-                        errors.name
-                        ? null
-                        : <span className={styles.errorsField__item_tip}/>
-                  }
-                 </div>
-                  <div 
-                  className={
-                    errors.password
-                    ? styles.errorsField__item + ' ' + styles.errors
-                    : styles.errorsField__item
-                  }
-
-
-                  >{errors.password ? 'В пароле должно быть минимум 8 символов' : 'Пароль корректен'}
-                   {
-                        errors.password
-                        ? null
-                        : <span className={styles.errorsField__item_tip}/>
-                  }
-                  </div>
-                  <div className={
-                     `
-                     ${
-                        errors.repeatPassword
-                        ? styles.errorsField__item + ' ' + styles.errors
-                        : styles.errorsField__item 
-                     }
-                     
-                     `
-                     }>
-                        {errors.repeatPassword ? 'Пароли не совпадают' : 'Пароли совпадают' }
-                     {
-                        errors.repeatPassword
-                        ? null
-                        :   <span className={styles.errorsField__item_tip}/>
-                     }
-                     
-                     </div>
-               </div>
-            </div>
-            <div className={styles.inputBox}>
+              <div className={styles.inputBox}>
                <Input
                   label="Введите e-mail"
                   name='email'
@@ -205,7 +126,7 @@ const signupPage = () => {
                   required
                />
             </div>
-            <div className={styles.inputBox}>
+<div className={styles.inputBox}>
                <Input
                   label="Введите свое имя"
                   type="text"
@@ -267,7 +188,7 @@ const signupPage = () => {
                      serverResult 
                      ? <div 
                         className={styles.server_response}
-                        > Вы успешно зарегистрировалсь, пожалуйста войдите в систему 
+                        > Вы успешно зарегистрировались, пожалуйста войдите в систему 
                      </div>
                      : null
                      
@@ -278,9 +199,5 @@ const signupPage = () => {
                      : null
                   }
          </form>
-        
-      </MainPage>
    )
 }
-
-export default signupPage
