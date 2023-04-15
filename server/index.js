@@ -5,13 +5,13 @@ const { default: mongoose } = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
+const request = require('request')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
 const UserSchema = require('./Models/user')
-const auth = require('./auth')
 
 app.prepare()
     .then(() => {
@@ -161,6 +161,18 @@ app.prepare()
                 console.log(e)
             }
         })
+
+        // server.post('/add_card', (req,res)=> {
+        //     request('https://bin-ip-checker.p.rapidapi.com/', ((err, resp, body)=> {
+        //         if(err){
+        //             res.send(err)
+        //         }else{
+        //             res.send(body)
+        //         }
+        //     }))
+        // })
+
+
         server.use(cors())
 
 
@@ -168,7 +180,7 @@ app.prepare()
             res.setHeader("Access-Control-Allow-Origin", "*")
             res.setHeader(
               "Access-Control-Allow-Headers",
-              "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+              "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization",
             )
             res.setHeader(
               "Access-Control-Allow-Methods",

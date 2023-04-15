@@ -14,7 +14,8 @@ export default function Input(
 		max,
 		disabled,
 		readOnly,
-		required
+		required,
+		maxLength
 	}
 ) {
 	const [isFocus, changeFocus] = useState(false)
@@ -50,6 +51,7 @@ export default function Input(
 					max={max}
 					disabled = {disabled}
 					readOnly={readOnly}
+					maxLength={maxLength}
 				/>
 			</div>
 		</>

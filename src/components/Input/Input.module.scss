@@ -12,7 +12,16 @@
   input[type=date]:focus::-webkit-datetime-edit {
 		color: black !important;
   }
+
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
+}
+
+
+
 
 .focus_for_order .label_order_ticket{
 	color: #000;

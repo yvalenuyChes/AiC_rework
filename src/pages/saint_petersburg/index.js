@@ -69,7 +69,6 @@ export default function Saint_petersburg(){
          setValidMinusButton(true)
          setValidPlusButton(true)
       }
-      console.log(personNum);
    }
 
    const handleButtonIncrease = () => {

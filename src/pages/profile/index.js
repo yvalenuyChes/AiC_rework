@@ -41,6 +41,11 @@ export default function Profile(){
             <div className={styles.profile_block}>
              <h3 className={styles.profile_title} >Профиль</h3>
              <h3 className={styles.profile_name} >  Ваше имя: {user.name}</h3>
+             <div className={styles.user_pay_card} >
+               <div>
+                  
+               </div>
+             </div>
            
              <div className={styles.profile__tickets} >
                <h3 className={styles.profile__tickets_title} >Ваши билеты</h3>
