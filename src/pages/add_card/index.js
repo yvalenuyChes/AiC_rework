@@ -22,8 +22,8 @@ export default function AddCreditCard(){
             params: {bin: `${cardNumber}`},
             headers: {
               'content-type': 'application/json',
-              'X-RapidAPI-Key': '80ca5654ddmshe749c82bc979a7cp106381jsnc9a514d97c9c',
-              'X-RapidAPI-Host': 'bin-ip-checker.p.rapidapi.com'
+              'X-RapidAPI-Key': process.env.X_RAPID_API_KEY,
+              'X-RapidAPI-Host': process.env.X_RAPID_API_HOST
             },
             data: '{"bin":"448590"}'
           };
