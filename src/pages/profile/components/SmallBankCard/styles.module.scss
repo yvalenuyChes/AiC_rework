@@ -1,0 +1,35 @@
+.smallBankCard{
+   width: 200px;
+   height: 100px;
+   border-radius: 20px;
+   position: relative;
+
+   &_brand{
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      width: 40px;
+      height: 25px;
+    
+   }
+
+   &_number{
+      position: absolute;
+      right: 20px;
+      top: 30px;
+   }
+}
+
+.Sber{
+   background-color: green;
+}
+
+
+
+.VISA{
+
+   background: url('../../../../images/bankCard/Visa_Inc._logo.svg.png');
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+}

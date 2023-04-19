@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import styles from './styles.module.scss'
 import axios from "axios"
-import Card from "./components/Card/Card"
+import Card from "../../components/Card/Card"
 import Input from "@/components/Input/Input"
-
+import { X_RAPID_API_HOST, X_RAPID_API_KEY } from "@/keys"
 
 
 export default function AddCreditCard(){
@@ -12,7 +12,7 @@ export default function AddCreditCard(){
 
    const [holderName, setHolderName] = useState('Vladislav Zaporozhets')
    const [cardNumber, setCardNumber] = useState('')
-   const [expireDate, setExpireDate] = useState('21/30')
+   const [expireDate] = useState('21/30')
    
    useEffect(() => {
       if(cardNumber.length === 6){
@@ -22,8 +22,8 @@ export default function AddCreditCard(){
             params: {bin: `${cardNumber}`},
             headers: {
               'content-type': 'application/json',
-              'X-RapidAPI-Key': process.env.X_RAPID_API_KEY,
-              'X-RapidAPI-Host': process.env.X_RAPID_API_HOST
+              'X-RapidAPI-Key': X_RAPID_API_KEY,
+              'X-RapidAPI-Host': X_RAPID_API_HOST
             },
             data: '{"bin":"448590"}'
           };
@@ -51,15 +51,21 @@ export default function AddCreditCard(){
       
     }
 
+
+
    return(
       <div className={styles.container} >
        <Card
-         // bank={styles[cardData.bank]}
+         bank={
+            cardData 
+            ? styles[cardData.BIN.issuer.name.split(' ').join('')]
+            : null
+         }
+           
          brand={
             cardData
             ?  styles[cardData.BIN.brand.split(' ').join('')]
             : null
-         
           }
          cardNumber={cardNumber}
          holderName={holderName}
@@ -72,6 +78,7 @@ export default function AddCreditCard(){
             value={cardNumber}
             onChange={cardNumberHandler}
             maxLength={16}
+            onPaste={true}
          />
          </form>
          <Input

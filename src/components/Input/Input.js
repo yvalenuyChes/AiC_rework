@@ -15,7 +15,8 @@ export default function Input(
 		disabled,
 		readOnly,
 		required,
-		maxLength
+		maxLength,
+		onPaste
 	}
 ) {
 	const [isFocus, changeFocus] = useState(false)
@@ -52,6 +53,11 @@ export default function Input(
 					disabled = {disabled}
 					readOnly={readOnly}
 					maxLength={maxLength}
+					onPaste={
+						onPaste
+						? event => event.preventDefault()
+						: () => false
+					}
 				/>
 			</div>
 		</>

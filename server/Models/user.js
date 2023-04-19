@@ -2,11 +2,7 @@ const {Schema, model} = require('mongoose')
 
 const UserSchema = new Schema({
    name:String,
-   email:{
-      type:String,
-      required:true,
-      unique: [true, "email already exists in database!"],
-   },
+   email:String,
    password: String,
    tickets:[{
       name: String,
@@ -14,6 +10,17 @@ const UserSchema = new Schema({
       dateFrom: Date,
       dateCome:Date,
       price: Number
+   }], 
+   photo: {
+      data: Buffer,
+      contentType: String
+   },
+   creditCards: [{
+      cardNumber: Number,
+      holderName: String,
+      expireDate: String,
+      bankName: String,
+      brand: String
    }]
 }, 
 { timestamp: true },

@@ -6,7 +6,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
 import '../styles/_styles.scss'
-import '../styles/styles.css'
 
 export default function App({ Component, ...rest }) {
 

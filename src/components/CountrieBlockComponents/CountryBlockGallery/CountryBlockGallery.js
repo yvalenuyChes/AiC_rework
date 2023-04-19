@@ -4,7 +4,7 @@ import MSK from '../../../images/countries/MSK.png'
 import VORZ from '../../../images/countries/VORZ.png'
 import NN from '../../../images/countries/NN.png'
 import SPB from '../../../images/countries/SPB.png'
-import NRK from '../../../images/countries/NRK.png'
+import BARN from '../../../images/countries/barnayl.jpg'
 import SRTV from '../../../images/countries/SRTV.png'
 import { KANADA_TEXT, MALDIVES_TEXT, MRAM_KANYON_TEXT, NIRERLAND_TEXT, NY_TEXT, VENGRIA_TEXT } from '../CountryBlockText/CountryBlockText'
 import styles from './CountryBlockGallery.module.scss'
@@ -44,15 +44,15 @@ export default function CountrieBlockGallery() {
 					imgSrc={SPB}
 					title="Санкт-Петербург"
 					content__text_subtitle={MRAM_KANYON_TEXT}
-					value='600'
+					value='100'
 					link={'/saint_petersburg'}
 					orderLink={'/saint_petersburg#order_ticketSPB'}
 				/>
 			</div>
 			<div className={styles.newYork}>
 				<MainContentImg
-					imgSrc={NRK}
-					title="Норильск"
+					// imgSrc={BARN}
+					title="Барнаул"
 					content__text_subtitle={NY_TEXT}
 					value='450'
 				/>

@@ -7,6 +7,7 @@ import axios from "axios"
 import Input from '../../Input/Input'
 import { togglePopup } from '@/redux/slices/openPopup'
 import styles from './styles.module.scss'
+import { removeColor, removeMessage, setColor, setMessage } from '@/redux/slices/AppMessage'
 
 
 
@@ -38,8 +39,14 @@ export const LoginTab = () => {
 		.then(() => {
 			dispatch(setAuthTrue())
 			dispatch(togglePopup())
-			
+			dispatch(setMessage('Вы успешно вошли в систему'))
+         dispatch(setColor('rgb(47, 160, 47)'))
 		})
+
+      .then(setTimeout(()=> {
+         dispatch(removeMessage())
+         dispatch(removeColor())
+      }, 3000))
 
 		 .catch(err => setServerError(err.response.data.message))
 

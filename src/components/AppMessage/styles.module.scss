@@ -1,0 +1,13 @@
+.messageContainer{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: sticky; 
+   left: 5px;
+   bottom: 10px;
+   height: 40px;
+   width: 300px;
+   font-size: 16px;
+   border-radius: 20px;
+   background-color: rgba(255, 255, 255, .5);
+}

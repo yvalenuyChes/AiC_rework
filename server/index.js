@@ -5,7 +5,6 @@ const { default: mongoose } = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
-const request = require('request')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -149,7 +148,7 @@ app.prepare()
             try{
 
                 UserSchema.findOneAndUpdate(
-                    {email:req.body.email }, 
+                    {email:req.body.email}, 
                     {$push: {tickets:ticket}}, 
                     { upsert: true },  
                     ).then(()=>{
@@ -162,15 +161,26 @@ app.prepare()
             }
         })
 
-        // server.post('/add_card', (req,res)=> {
-        //     request('https://bin-ip-checker.p.rapidapi.com/', ((err, resp, body)=> {
-        //         if(err){
-        //             res.send(err)
-        //         }else{
-        //             res.send(body)
-        //         }
-        //     }))
-        // })
+        server.post('/add_card', (req,res)=> {
+            const creditCard = {
+                cardNumber: req.body.cardNumber,
+                holderName: req.body.holderName,
+                expireDate: '21/30',
+                bankName: req.body.bankName,
+                brand:req.body.brand
+            }
+            try{
+                UserSchema.findOneAndUpdate(
+                    {email:req.body.email },
+                    {$push: {creditCards:creditCard}},
+                    { upsert: true }, 
+                ).then(()=> {
+                    res.status(200).send('Updated succesfully')
+                })
+            }catch(e){
+                console.log(e)
+            }
+        })
 
 
         server.use(cors())

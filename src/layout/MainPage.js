@@ -4,7 +4,7 @@ import { setAuthTrue } from '@/redux/slices/isAuth'
 import Cookies from 'universal-cookie'
 import ButtonToTop from '../components/ButtonToTop/ButtonToTop'
 import NavBar from '../components/NavBar/NavBar'
-
+import { AppMessage } from '@/components/AppMessage/AppMessage'
 
 import styles from './styles.module.scss'
 
@@ -62,6 +62,7 @@ export default function MainPage({ children }) {
 				<main className={styles.wrapper}>
 					{children}
 				</main>
+				<AppMessage/>
 				<ButtonToTop />
 		</>
 	)
