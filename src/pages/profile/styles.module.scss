@@ -50,6 +50,8 @@
 
    .user_pay_card{
 
+      padding: 100px 0;
+
       &__title{
          font-size: 24px;
          text-align: center;  
@@ -68,6 +70,16 @@
          border-radius: 10px;
       }
 
+      &_saved{
+         display: grid; 
+            grid-template-columns: 1fr 1fr 1fr; 
+            grid-template-rows: 1fr; 
+            gap: 20px 20px; 
+            justify-items: center;
+      }
+
+
+
 
       &__add_card{
          display: flex;
@@ -78,10 +90,11 @@
          border: 2px solid #000;
          border-radius: 10px;
 
-
          &:hover{
             background-color: royalblue;
          }
+
+       
       }
      }
 }

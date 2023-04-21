@@ -91,15 +91,17 @@ export default function Profile(){
                   <br/>
                   Газпром банк
                </div>
-               <div>
+               <div className={styles.user_pay_card_saved} >
                   {
                      userBankCards
-                     ? userBankCards.map(bankCard => {
+                     ? userBankCards.map((bankCard, key) => {
                         return(
                            <SmallBankCard
                               cardNumber={bankCard.cardNumber}
                               bank={bankCard.bankName}
                               brand={bankCard.brand}
+                              key={key}
+                              userEmail={user.email}
                            />
                         )
                      })

@@ -37,8 +37,7 @@ app.prepare()
                         message: 'Email уже занят',
                     })
                 }
-            }
-            )
+            })
 
 
             bcrypt
@@ -162,6 +161,9 @@ app.prepare()
         })
 
         server.post('/add_card', (req,res)=> {
+
+            
+          
             const creditCard = {
                 cardNumber: req.body.cardNumber,
                 holderName: req.body.holderName,
@@ -170,16 +172,77 @@ app.prepare()
                 brand:req.body.brand
             }
             try{
-                UserSchema.findOneAndUpdate(
-                    {email:req.body.email },
-                    {$push: {creditCards:creditCard}},
-                    { upsert: true }, 
-                ).then(()=> {
-                    res.status(200).send('Updated succesfully')
+                
+                UserSchema.findOne({email: req.body.email}).then(user=>{  
+                    let isUniqCard = true
+                    if(user.creditCards.length > 0){
+                        user.creditCards.map(card => {
+                            if(card.cardNumber.toString() === req.body.cardNumber){
+                              return isUniqCard = false
+                            }
+                        })
+                        isUniqCard
+                        ?
+                        UserSchema.findOneAndUpdate(
+                                {email:req.body.email },
+                                {$push: {creditCards:creditCard}},
+                                { upsert: true }, 
+                            ).then(()=> {
+                                res.status(200).send('Вы успешно привязали карту')
+                            })
+                            : 
+                            res.status(400).send({
+                                message: 'Карта уже добавлена',
+                            })
+                    }else{
+                        UserSchema.findOneAndUpdate(
+                            {email:req.body.email },
+                            {$push: {creditCards:creditCard}},
+                            { upsert: true }, 
+                        ).then(()=> {
+                            res.status(200).send('Вы успешно привязали карту')
+                        })
+                    }
+                   
                 })
+                
             }catch(e){
                 console.log(e)
             }
+        })
+
+
+        server.post('/delete_card', (req, res)=> {
+            UserSchema.findOne({email: req.body.email}).then(
+                user => { 
+                    let findCard = null
+                    let deletedCardNumber = null
+
+                    user.creditCards.map((card, key)=> {
+                        if(card.cardNumber.toString() === req.body.cardNumber){
+                            findCard = key
+                            deletedCardNumber = card.cardNumber.toString()
+                           
+                        }
+                    })
+
+                    findCard >= 0
+                    ? UserSchema.findOneAndUpdate(
+                        {email:req.body.email },
+                        {$pull: {creditCards:{ cardNumber:deletedCardNumber} }},
+                        { upsert: true }, 
+                    )
+                    .then(()=> {
+                        res.status(200).send({
+                            message:'Карта удалена'
+                        })
+                    })
+                    : 
+                    res.status(400).send({
+                        message:'Карта не найдена'
+                    })
+                }
+            )
         })
 
 

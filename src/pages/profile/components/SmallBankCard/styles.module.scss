@@ -18,6 +18,23 @@
       right: 20px;
       top: 30px;
    }
+
+   &_buttons{
+      position: absolute;
+      transition: all .3s ease;
+      display: flex;
+      opacity: 0;
+   }
+
+   &:hover{
+      .smallBankCard_buttons{
+         opacity: 1;
+         transition: all .3s ease;
+      }
+   }
+
+
+
 }
 
 .Sber{

@@ -4,6 +4,8 @@ import axios from "axios"
 import Card from "../../../../components/Card/Card"
 import Input from "@/components/Input/Input"
 import { X_RAPID_API_HOST, X_RAPID_API_KEY } from "@/keys"
+import { useDispatch } from "react-redux"
+import { setColor, setMessage, removeColor, removeMessage } from "@/redux/slices/AppMessage"
 
 export const AddBankCardForm = ({userEmail}) => {
    const [cardData, setCardData] = useState(null)
@@ -11,32 +13,32 @@ export const AddBankCardForm = ({userEmail}) => {
    const [holderName, setHolderName] = useState('')
    const [cardNumber, setCardNumber] = useState('')
    const [expireDate] = useState('21/30')
+
+   const dispatch = useDispatch()
    
-   // useEffect(() => {
-   //    if(cardNumber.length === 6){
-   //       const options = {
-   //          method: 'POST',
-   //          url: 'https://bin-ip-checker.p.rapidapi.com/',
-   //          params: {bin: `${cardNumber}`},
-   //          headers: {
-   //            'content-type': 'application/json',
-   //            'X-RapidAPI-Key': X_RAPID_API_KEY,
-   //            'X-RapidAPI-Host': X_RAPID_API_HOST
-   //          },
-   //          data: '{"bin":"448590"}'
-   //        };
+   useEffect(() => {
+      if(cardNumber.length === 6){
+         const options = {
+            method: 'POST',
+            url: 'https://bin-ip-checker.p.rapidapi.com/',
+            params: {bin: `${cardNumber}`},
+            headers: {
+              'content-type': 'application/json',
+              'X-RapidAPI-Key': X_RAPID_API_KEY,
+              'X-RapidAPI-Host': X_RAPID_API_HOST
+            },
+            data: '{"bin":"448590"}'
+          };
           
-   //        axios.request(options)
-   //        .then(function (response) {
-   //          setCardData(response.data)
-   //        })
-   //        .catch(function (error) {
-   //           console.error(error)
-   //        })
-   // }
-   // }, [cardNumber])
-   
- // console.log(userEmail);
+          axios.request(options)
+          .then(function (response) {
+            setCardData(response.data)
+          })
+          .catch(function (error) {
+             console.error(error)
+          })
+   }
+   }, [cardNumber])
 
 
    const cardNumberHandler = event => {
@@ -60,23 +62,21 @@ export const AddBankCardForm = ({userEmail}) => {
             email: userEmail,
             cardNumber,
             holderName,
-            // bankName: cardData.BIN.issuer.name.split(' ').join(''),
-            // brand:cardData.BIN.brand.split(' ').join('')
-            bankName: 'Sber',
-            brand: 'VISA'
+            bankName: cardData.BIN.issuer.name.split(' ').join(''),
+            brand:cardData.BIN.brand.split(' ').join('')
          }
       }
 
       axios(configuration)
-      // .then(result => 
-      //    setServerResult(result.data),
-      //    setAccept(false),
-      //    setServerError(null),
-      //    setPersonNum(1),
-      //    setDate(currentDate.toJSON().slice(0, 10))
-      // )
+      .then(() => 
+         dispatch(setMessage('Вы успешно привязали карту')),
+         dispatch(setColor('rgb(47, 160, 47)'))
+      )
+      .then(setTimeout(()=> {
+         dispatch(removeMessage())
+         dispatch(removeColor())
+      }, 3000))
       .catch(err => {
-      //   setServerError(err)
       console.log(err)
       })
       // .finally(setLoading(false))
