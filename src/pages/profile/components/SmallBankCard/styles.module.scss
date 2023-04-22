@@ -19,6 +19,14 @@
       top: 30px;
    }
 
+   &__loader{
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
    &_buttons{
       position: absolute;
       transition: all .3s ease;

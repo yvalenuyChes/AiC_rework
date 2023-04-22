@@ -3,13 +3,11 @@ import Head from 'next/head'
 import { useSelector } from 'react-redux'
 import MainPage from '@/layout/MainPage'
 import axios from 'axios'
-import styles from './styles.module.scss'
 import { Ticket } from './components/Ticket/Ticket'
-import Image from 'next/image'
-import Add from '../../images/bankCard/Add.svg'
 import { AddBankCardForm } from './components/AddBankCardForm/AddBankCardForm'
 import { SmallBankCard } from './components/SmallBankCard/SmallBankCard'
 import Loader from '@/components/Loader/Loader'
+import styles from './styles.module.scss'
 
 
 
@@ -17,7 +15,6 @@ import Loader from '@/components/Loader/Loader'
 export default function Profile(){
 
    const [user,setUser] = useState('')
-   const [isLoading, setLoading] = useState(false)
    const [tikets, setTikets] = useState(null)
    const [userBankCards, setUserBankCards] = useState(null)
    const [addBankCard, setAddBankCard] = useState(false)
@@ -27,14 +24,12 @@ export default function Profile(){
          axios.get('http://localhost:3000/user')
          .then(result => setUser(result.data) )
          .catch(e => console.log(e))
-   }, [])
+   })
 
 
    useEffect(()=>{
-      setLoading(true)
       setTikets(user.tickets)
       setUserBankCards(user.creditCards)
-      setLoading(false)
    })
 
 

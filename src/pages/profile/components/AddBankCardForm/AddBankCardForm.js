@@ -15,6 +15,7 @@ export const AddBankCardForm = ({userEmail}) => {
    const [cardNumber, setCardNumber] = useState('')
    const [expireDate] = useState('21/30')
    const [loading, setLoading] = useState(false)
+   const [cardError, setCardError] = useState(false)
 
    const dispatch = useDispatch()
    
@@ -35,9 +36,16 @@ export const AddBankCardForm = ({userEmail}) => {
           axios.request(options)
           .then(function (response) {
             setCardData(response.data)
+            setCardError(false)
           })
-          .catch(function (error) {
-             console.error(error)
+          .catch(err =>  {
+             dispatch(setMessage('Карта не поддерживается')) 
+             dispatch(setColor('rgb(208, 97, 97)'))
+             setCardError(true)
+             setTimeout(()=> {
+               dispatch(removeMessage())
+               dispatch(removeColor())
+            }, 3000)
           })
    }
    }, [cardNumber])
@@ -125,17 +133,15 @@ export const AddBankCardForm = ({userEmail}) => {
             onChange={holderNameHandler}
          />
          <button 
-         disabled={loading}  
-         className={ loading ? styles.button__disabled :  styles.button  } 
+         disabled={loading || cardNumber === '' || holderName === '' || cardError}  
+         className={ 
+            loading || 
+            cardNumber === '' || 
+            holderName === '' || 
+            cardError ? styles.button__disabled :  styles.button  } 
          type="submit" 
          >{loading ? <Loader/> : 'Привязать'}</button>
          </form>
-         
-         <div className={styles.card} >
-            <div>
-
-            </div>
-         </div>
          
       </div>
    )

@@ -253,7 +253,7 @@ app.prepare()
                         })
                     })
                     : 
-                    res.status(400).send({
+                    res.status(200).send({
                         message:'Карта не найдена',
                         color:'rgb(208, 97, 97)',
                     })
