@@ -9,6 +9,7 @@ import Image from 'next/image'
 import Add from '../../images/bankCard/Add.svg'
 import { AddBankCardForm } from './components/AddBankCardForm/AddBankCardForm'
 import { SmallBankCard } from './components/SmallBankCard/SmallBankCard'
+import Loader from '@/components/Loader/Loader'
 
 
 
@@ -26,8 +27,8 @@ export default function Profile(){
          axios.get('http://localhost:3000/user')
          .then(result => setUser(result.data) )
          .catch(e => console.log(e))
-         // .finally(setLoading(false))
    }, [])
+
 
    useEffect(()=>{
       setLoading(true)
@@ -35,6 +36,7 @@ export default function Profile(){
       setUserBankCards(user.creditCards)
       setLoading(false)
    })
+
 
    return(
       <MainPage>
@@ -47,28 +49,42 @@ export default function Profile(){
             ?
             <div className={styles.profile_block}>
              <h3 className={styles.profile_title} >Профиль</h3>
-             <h3 className={styles.profile_name} >  Ваше имя: {user.name}</h3>
+             <div className={styles.profile_name}>
+               <h3 className={styles.profile_name_title} >  Ваше имя: {user === '' ?  <Loader/>  : user.name }</h3>
+             </div>
+       
 
            
              <div className={styles.profile__tickets} >
                <h3 className={styles.profile__tickets_title} >Ваши билеты</h3>
-               <div className={styles.profile__tickets_list} >
+               <div>
                   {
                   tikets
-                     ?
-                     tikets.map((ticket, key) => {
-                        return(
-                           <Ticket
-                              city={ticket.name}
-                              personNumber={ticket.personNumber}
-                              dateFrom={ticket.dateFrom}
-                              dateCome={ticket.dateCome}
-                              price={ticket.price}
-                              key={key}
-                           />
-                        )
-                     })
-                     : null
+                  ?  
+                  tikets.length !== 0
+                  ?
+                  <div className={styles.profile__tickets_list} >
+                     {
+                        tikets.map((ticket, key) => {
+                           return(
+                              <Ticket
+                                 city={ticket.name}
+                                 personNumber={ticket.personNumber}
+                                 dateFrom={ticket.dateFrom}
+                                 dateCome={ticket.dateCome}
+                                 price={ticket.price}
+                                 key={key}
+                              />
+                           )
+                        })
+                     }
+                  </div>
+                  : <div className={styles.profile__tickets__no_tickets} >Вы еще не заказали билеты</div> 
+
+                 
+                  : 
+                  <div className={styles.profile__tickets__loader} > <Loader/></div>
+                  
                   }
                </div>
              </div>
@@ -91,37 +107,45 @@ export default function Profile(){
                   <br/>
                   Газпром банк
                </div>
-               <div className={styles.user_pay_card_saved} >
+               <div className={styles.user_pay_card_container} >
                   {
+
                      userBankCards
-                     ? userBankCards.map((bankCard, key) => {
-                        return(
-                           <SmallBankCard
-                              cardNumber={bankCard.cardNumber}
-                              bank={bankCard.bankName}
-                              brand={bankCard.brand}
-                              key={key}
-                              userEmail={user.email}
-                           />
-                        )
-                     })
-                     : <div>
-                        <h3>Нет привязанных банковских карт</h3>
-                     </div>
+                     ? 
+                     userBankCards.length !== 0
+                        ? 
+                        <div className={styles.user_pay_card_saved}>
+                           {
+                              userBankCards.map((bankCard, key) => {
+                                 return(
+                                    <SmallBankCard
+                                       cardNumber={bankCard.cardNumber}
+                                       bank={bankCard.bankName}
+                                       brand={bankCard.brand}
+                                       key={key}
+                                       userEmail={user.email}
+                                    />
+                                 )
+                              })
+                           }
+                         
+                        </div>
+                       
+                        : <div className={styles.user_pay_card__no_cards} >
+                           <h3>Нет привязанных банковских карт</h3>
+                        </div>
+                     :  <div className={styles.user_pay_card__loader} > <Loader/></div>
                   }
                </div>
-               <div>
-                     <h3>Добавить карту</h3>
-                     <div className={styles.user_pay_card__add_card} 
+               <div className={styles.user_pay_card__add_card__container}  >
+                    
+                     <button 
+                     type='button'  
                      onClick={() => setAddBankCard(!addBankCard)}
+                     className={styles.user_pay_card__add_card__button}
                      >
-                        
-                       <Image
-                       src={Add}
-                       height={20}
-                       width={20}
-                       />
-                     </div>
+                        Добавить карту
+                    </button>
                      {
                         addBankCard
                         ? 

@@ -53,7 +53,27 @@
       text-transform: uppercase;
       display: block;
       text-align: center;
-      line-height: 48px;
+      height: 48px;
+}
+
+.tab_button_disabled{
+   transition: ease .5s all;
+   margin: 30px auto 10px auto;
+   border: none;
+   border-radius: 10px;
+   width: 200px;
+   background: #f5f5f5;
+   color:#000;
+   font-size: 18px;
+   text-transform: uppercase;
+   display: block;
+   text-align: center;
+   line-height: 48px;
+   cursor: not-allowed;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 48px;
 }
 
 .tab_button:hover{
@@ -92,7 +112,14 @@
    font-size: 12px;
 } 
 
-
+.popup__errors{
+   height: 30px;
+   text-align: center;
+   padding: 30px 0 20px 0;
+   font-size: 16px;
+   font-weight: 600;
+   color: rgb(224, 70, 70);
+}
 
 
 

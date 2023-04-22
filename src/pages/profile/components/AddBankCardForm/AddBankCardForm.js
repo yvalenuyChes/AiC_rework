@@ -6,6 +6,7 @@ import Input from "@/components/Input/Input"
 import { X_RAPID_API_HOST, X_RAPID_API_KEY } from "@/keys"
 import { useDispatch } from "react-redux"
 import { setColor, setMessage, removeColor, removeMessage } from "@/redux/slices/AppMessage"
+import Loader from "@/components/Loader/Loader"
 
 export const AddBankCardForm = ({userEmail}) => {
    const [cardData, setCardData] = useState(null)
@@ -13,6 +14,7 @@ export const AddBankCardForm = ({userEmail}) => {
    const [holderName, setHolderName] = useState('')
    const [cardNumber, setCardNumber] = useState('')
    const [expireDate] = useState('21/30')
+   const [loading, setLoading] = useState(false)
 
    const dispatch = useDispatch()
    
@@ -53,7 +55,7 @@ export const AddBankCardForm = ({userEmail}) => {
 
     const handleSubmit = event => {
       event.preventDefault()
-      // setLoading(true)
+      setLoading(true)
       
       const configuration = {
          method:'post',
@@ -68,9 +70,11 @@ export const AddBankCardForm = ({userEmail}) => {
       }
 
       axios(configuration)
-      .then(() => 
-         dispatch(setMessage('Вы успешно привязали карту')),
-         dispatch(setColor('rgb(47, 160, 47)'))
+      .then(result => {
+         dispatch(setMessage(`${result.data.message}`))
+         dispatch(setColor(`${result.data.color}`))
+      }
+         
       )
       .then(setTimeout(()=> {
          dispatch(removeMessage())
@@ -79,7 +83,7 @@ export const AddBankCardForm = ({userEmail}) => {
       .catch(err => {
       console.log(err)
       })
-      // .finally(setLoading(false))
+      .finally(() => setLoading(false))
    }
 
 
@@ -120,7 +124,11 @@ export const AddBankCardForm = ({userEmail}) => {
             value={holderName}
             onChange={holderNameHandler}
          />
-         <button type="submit" >Привязать</button>
+         <button 
+         disabled={loading}  
+         className={ loading ? styles.button__disabled :  styles.button  } 
+         type="submit" 
+         >{loading ? <Loader/> : 'Привязать'}</button>
          </form>
          
          <div className={styles.card} >

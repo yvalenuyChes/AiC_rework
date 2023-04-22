@@ -59,8 +59,9 @@ app.prepare()
                     })
                     .catch(err => {
                         res.status(500).send({
-                            message:'Error creating user',
-                            err
+                            message:'Ошибка сервера',
+                            err,
+                            color:'rgb(208, 97, 97)'
                         })
                     })
                     
@@ -83,7 +84,8 @@ app.prepare()
                 .then(passwordCheck => {
                     if(!passwordCheck){
                         return response.status(400).send({
-                            message: "Passwords does not match",
+                            message: "Неверный пароль",
+                            // color:'rgb(208, 97, 97)',
                             error,
                           })
                     }
@@ -98,21 +100,22 @@ app.prepare()
 
 
                     res.status(200).send({
-                        message: "Login Successful",
+                        message: "Вы успешно вошли в систему",
                         email: user.email,
                         token,
+                        color:'rgb(47, 160, 47)'
                     })
                 })
                 .catch(err => {
                     res.status(400).send({
-                        message:'Passwords does not match',
+                        message:'Неверный пароль',
                         err
                     })
                 })
             })
             .catch(err => {
                 res.status(404).send({
-                    message:'Email not found',
+                    message:'Почта не найдена',
                     err
                 })
             })
@@ -151,7 +154,10 @@ app.prepare()
                     {$push: {tickets:ticket}}, 
                     { upsert: true },  
                     ).then(()=>{
-                        res.status(200).send('Updated succesfully')
+                        res.status(200).send({
+                          message:  'Билет заказан',
+                          color:'rgb(47, 160, 47)'
+                        })
                     })
                    
 
@@ -188,11 +194,15 @@ app.prepare()
                                 {$push: {creditCards:creditCard}},
                                 { upsert: true }, 
                             ).then(()=> {
-                                res.status(200).send('Вы успешно привязали карту')
+                                res.status(200).send({
+                                  message:  'Вы успешно привязали карту',
+                                  color:'rgb(47, 160, 47)'
+                                })
                             })
                             : 
-                            res.status(400).send({
+                            res.status(200).send({
                                 message: 'Карта уже добавлена',
+                                color:'rgb(208, 97, 97)',
                             })
                     }else{
                         UserSchema.findOneAndUpdate(
@@ -200,7 +210,11 @@ app.prepare()
                             {$push: {creditCards:creditCard}},
                             { upsert: true }, 
                         ).then(()=> {
-                            res.status(200).send('Вы успешно привязали карту')
+                            res.status(200).send({
+                               message: 'Вы успешно привязали карту',
+                               color:'rgb(47, 160, 47)'
+                            })
+
                         })
                     }
                    
@@ -234,12 +248,14 @@ app.prepare()
                     )
                     .then(()=> {
                         res.status(200).send({
-                            message:'Карта удалена'
+                            message:'Карта удалена',
+                            color:'rgb(47, 160, 47)'
                         })
                     })
                     : 
                     res.status(400).send({
-                        message:'Карта не найдена'
+                        message:'Карта не найдена',
+                        color:'rgb(208, 97, 97)',
                     })
                 }
             )

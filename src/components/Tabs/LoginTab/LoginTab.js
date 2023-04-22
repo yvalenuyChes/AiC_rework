@@ -19,43 +19,6 @@ export const LoginTab = () => {
 	const cookies = new Cookies()
    const dispatch = useDispatch()
 
-	async function login(){
-      setLoading(true)
-		 const configuration = {
-			 method: "post",
-			 url: "http://localhost:3000/login",
-			 data: {
-				email,
-				password,
-			 },
-		 }
-		 axios(configuration)
-		 .then(result => {
-			 cookies.set('TOKEN', result.data.token, {
-				 path:'/',
-			 })
-		 })
-
-		.then(() => {
-			dispatch(setAuthTrue())
-			dispatch(togglePopup())
-			dispatch(setMessage('Вы успешно вошли в систему'))
-         dispatch(setColor('rgb(47, 160, 47)'))
-		})
-
-      .then(setTimeout(()=> {
-         dispatch(removeMessage())
-         dispatch(removeColor())
-      }, 3000))
-
-		 .catch(err => setServerError(err.response.data.message))
-
-       .finally(setLoading(false))
-	 }
-
-
-
-
 	const [values, setValues] = useState({
 		email:'',
 		password:''
@@ -72,9 +35,40 @@ export const LoginTab = () => {
       })
    }
 
-	const handleSubmit = event => {
+	function handleSubmit(event) {
+      setLoading(true),
       event.preventDefault()
-      login()
+
+		 const configuration = {
+			method: "post",
+			url: "http://localhost:3000/login",
+			data: {
+			   email:email.toLowerCase().trim(),
+				password: password.trim(),
+			 },
+		 }
+		 axios(configuration)
+		 .then(result => {
+			 cookies.set('TOKEN', result.data.token, {
+				 path:'/',
+			 })
+          dispatch(setMessage(`${result.data.message}`))
+          dispatch(setColor(`${result.data.color}`))
+		 })
+
+		.then(() => {
+			dispatch(setAuthTrue())
+			dispatch(togglePopup())
+		})
+
+      .then(setTimeout(()=> {
+         dispatch(removeMessage())
+         dispatch(removeColor())
+      }, 3000))
+
+		 .catch(err => setServerError(err.response.data.message))
+
+       .finally(() => setLoading(false))
    }
 
 
@@ -105,9 +99,17 @@ export const LoginTab = () => {
                onChange={handleChange('password')}
             />
          </div>
+         {
+
+         }
             <button
                type="submit"
-               className={styles.tab_button}
+               disabled={loading || email === '' || password === '' }
+               className={
+                  loading || email === '' || password === '' 
+                  ?  styles.tab_button_disabled   
+                  : styles.tab_button
+               }
             >{ loading ? <Loader/> : 'Войти' }</button>
 
          <a href="##" className={styles.tab_link}>Я забыл e-mail или пароль</a>
