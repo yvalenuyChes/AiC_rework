@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
-import { setColor, setMessage } from '@/redux/slices/AppMessage'
+import { setColor, setMessage, removeMessage, removeColor } from '@/redux/slices/AppMessage'
 import axios from 'axios'
 import styles from './styles.module.scss'
 import Loader from '@/components/Loader/Loader'
@@ -10,7 +10,8 @@ export const SmallBankCard = ({
    cardNumber,
    brand,
    bank,
-   userEmail
+   userEmail,
+   setReloadCards
 }) => {
 
    const number = cardNumber.toString()
@@ -34,6 +35,8 @@ export const SmallBankCard = ({
       .then(result=> {
          dispatch(setMessage(`${result.data.message}`))
          dispatch(setColor(`${result.data.color}`))
+         setReloadCards(new Date())
+         console.log(new Date())
       })
       .then(setTimeout(()=> {
          dispatch(removeMessage())

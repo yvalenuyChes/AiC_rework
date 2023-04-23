@@ -15,23 +15,19 @@ import styles from './styles.module.scss'
 export default function Profile(){
 
    const [user,setUser] = useState('')
-   const [tikets, setTikets] = useState(null)
-   const [userBankCards, setUserBankCards] = useState(null)
    const [addBankCard, setAddBankCard] = useState(false)
    const isLogin = useSelector(state => state.isAuth.isAuth)
+   const [reloadCards, setReloadCards] = useState('')
 
    useEffect(()=>{
          axios.get('http://localhost:3000/user')
          .then(result => setUser(result.data) )
          .catch(e => console.log(e))
-   })
+   }, [addBankCard, reloadCards])
 
 
-   useEffect(()=>{
-      setTikets(user.tickets)
-      setUserBankCards(user.creditCards)
-   })
-
+   const test = 'SAVINGSBANKOFTHERUSSIANFEDERATION(SBERBANK)'
+   console.log(test);
 
    return(
       <MainPage>
@@ -54,13 +50,13 @@ export default function Profile(){
                <h3 className={styles.profile__tickets_title} >Ваши билеты</h3>
                <div>
                   {
-                  tikets
+                  user.tickets
                   ?  
-                  tikets.length !== 0
+                  user.tickets.length !== 0
                   ?
                   <div className={styles.profile__tickets_list} >
                      {
-                        tikets.map((ticket, key) => {
+                         user.tickets.map((ticket, key) => {
                            return(
                               <Ticket
                                  city={ticket.name}
@@ -105,13 +101,13 @@ export default function Profile(){
                <div className={styles.user_pay_card_container} >
                   {
 
-                     userBankCards
+                     user.creditCards
                      ? 
-                     userBankCards.length !== 0
+                     user.creditCards.length !== 0
                         ? 
                         <div className={styles.user_pay_card_saved}>
                            {
-                              userBankCards.map((bankCard, key) => {
+                              user.creditCards.map((bankCard, key) => {
                                  return(
                                     <SmallBankCard
                                        cardNumber={bankCard.cardNumber}
@@ -119,6 +115,7 @@ export default function Profile(){
                                        brand={bankCard.brand}
                                        key={key}
                                        userEmail={user.email}
+                                       setReloadCards={setReloadCards}
                                     />
                                  )
                               })
@@ -145,6 +142,7 @@ export default function Profile(){
                         addBankCard
                         ? 
                         <AddBankCardForm
+                           setAddBankCard={setAddBankCard}
                            userEmail={user.email}
                         />
                         : null

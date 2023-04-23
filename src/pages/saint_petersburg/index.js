@@ -42,8 +42,6 @@ export default function Saint_petersburg(){
          axios.get('http://localhost:3000/user')
          .then(result => setUserEmail(result.data.email) )
          .catch(e => console.log(e))
-      
-      
    }, [])
 
    
@@ -115,6 +113,7 @@ export default function Saint_petersburg(){
          setAccept(false),
          setServerError(null),
          setPersonNum(1),
+         setPrice(5000),
          setDate(currentDate.toJSON().slice(0, 10))
       )
       .catch(err => {

@@ -8,19 +8,20 @@ import { useDispatch } from "react-redux"
 import { setColor, setMessage, removeColor, removeMessage } from "@/redux/slices/AppMessage"
 import Loader from "@/components/Loader/Loader"
 
-export const AddBankCardForm = ({userEmail}) => {
+export const AddBankCardForm = ({userEmail, setAddBankCard}) => {
    const [cardData, setCardData] = useState(null)
 
    const [holderName, setHolderName] = useState('')
    const [cardNumber, setCardNumber] = useState('')
    const [expireDate] = useState('21/30')
    const [loading, setLoading] = useState(false)
-   const [cardError, setCardError] = useState(false)
+   const [cardError, setCardError] = useState(true)
+   
 
    const dispatch = useDispatch()
    
    useEffect(() => {
-      if(cardNumber.length === 6){
+      if(cardNumber.length === 15){
          const options = {
             method: 'POST',
             url: 'https://bin-ip-checker.p.rapidapi.com/',
@@ -30,14 +31,35 @@ export const AddBankCardForm = ({userEmail}) => {
               'X-RapidAPI-Key': X_RAPID_API_KEY,
               'X-RapidAPI-Host': X_RAPID_API_HOST
             },
-            data: '{"bin":"448590"}'
           };
           
           axios.request(options)
-          .then(function (response) {
-            setCardData(response.data)
+          .then(response => {
+               setCardData(response.data)
+            if( 
+               response.data.BIN.issuer.name.split(' ').join('') === 'CJSCALFA-BANK'
+               || response.data.BIN.issuer.name.split(' ').join('').substring(34,42) === 'SBERBANK'
+               || response.data.BIN.issuer.name.split(' ').join('') === 'GAZPROMBANKOJSC' 
+               || response.data.BIN.issuer.name.split(' ').join('') === 'TINKOFFBANK' 
+               || response.data.BIN.issuer.name.split(' ').join('') === 'VNESHTORGBANK' 
+               || response.data.BIN.issuer.name.split(' ').join('') === 'CBOTKRITIECJSC' 
+               || response.data.BIN.issuer.name.split(' ').join('') === 'JSCBROSBANK' 
+            )
+           {
             setCardError(false)
+           }else{
+            dispatch(setMessage('Карта не поддерживается')) 
+            dispatch(setColor('rgb(208, 97, 97)'))
+            setCardError(true)
+            setTimeout(()=> {
+              dispatch(removeMessage())
+              dispatch(removeColor())
+           }, 3000)
+           }
+            
+           
           })
+        
           .catch(err =>  {
              dispatch(setMessage('Карта не поддерживается')) 
              dispatch(setColor('rgb(208, 97, 97)'))
@@ -72,7 +94,12 @@ export const AddBankCardForm = ({userEmail}) => {
             email: userEmail,
             cardNumber,
             holderName,
-            bankName: cardData.BIN.issuer.name.split(' ').join(''),
+            bankName: 
+            cardData.BIN.issuer.name.split(' ').join('').substring(34,42) === "SBERBANK" 
+            ? cardData.BIN.issuer.name.split(' ').join('').substring(34,42)
+            : cardData.BIN.issuer.name.split(' ').join('')
+            ,
+
             brand:cardData.BIN.brand.split(' ').join('')
          }
       }
@@ -81,15 +108,18 @@ export const AddBankCardForm = ({userEmail}) => {
       .then(result => {
          dispatch(setMessage(`${result.data.message}`))
          dispatch(setColor(`${result.data.color}`))
-      }
-         
+         if(result.data.message === 'Вы успешно привязали карту'){
+            setAddBankCard(false)
+         }
+      })
+      .then(
+         setTimeout(()=> {
+            dispatch(removeMessage())
+            dispatch(removeColor())
+         }, 3000)
       )
-      .then(setTimeout(()=> {
-         dispatch(removeMessage())
-         dispatch(removeColor())
-      }, 3000))
       .catch(err => {
-      console.log(err)
+         console.log(err)
       })
       .finally(() => setLoading(false))
    }
@@ -100,11 +130,15 @@ export const AddBankCardForm = ({userEmail}) => {
       <div className={styles.container} >
        <Card
          bank={
-            cardData 
-            ? styles[cardData.BIN.issuer.name.split(' ').join('')]
+            cardData
+            ?
+            cardData.BIN.issuer.name.split(' ').join('').substring(34,42) === 'SBERBANK'
+
+               ? styles[cardData.BIN.issuer.name.split(' ').join('').substring(34,42)]
+               : styles[cardData.BIN.issuer.name.split(' ').join('')]
             : null
          }
-           
+         
          brand={
             cardData
             ?  styles[cardData.BIN.brand.split(' ').join('')]
@@ -133,12 +167,14 @@ export const AddBankCardForm = ({userEmail}) => {
             onChange={holderNameHandler}
          />
          <button 
-         disabled={loading || cardNumber === '' || holderName === '' || cardError}  
+         disabled={loading || cardNumber === '' || holderName === ''|| cardError
+         }  
          className={ 
             loading || 
             cardNumber === '' || 
             holderName === '' || 
-            cardError ? styles.button__disabled :  styles.button  } 
+            cardError ? styles.button__disabled :  styles.button  
+         } 
          type="submit" 
          >{loading ? <Loader/> : 'Привязать'}</button>
          </form>

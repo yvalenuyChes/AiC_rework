@@ -1,6 +1,6 @@
 .smallBankCard{
-   width: 200px;
-   height: 100px;
+   width: 150px;
+   height: 80px;
    border-radius: 20px;
    position: relative;
 
@@ -45,16 +45,77 @@
 
 }
 
-.Sber{
-   background-color: green;
+.NSPKMIR{
+   background:  url('../../../../images/bankCard/2560px-Mir-logo.SVG.svg.png') ;
+   background-size: contain;
+   background-position: center;
+   background-repeat: no-repeat;
 }
 
 
 
 .VISA{
-
    background: url('../../../../images/bankCard/Visa_Inc._logo.svg.png');
    background-size: contain;
    background-repeat: no-repeat;
    background-position: center;
+}
+
+.MASTERCARD{
+   background:  url('../../../../images/bankCard/Mastercard-Logo.wine.png') ;
+   background-size: contain;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+
+
+.CJSCALFA-BANK{
+   background:  url('../../../../images/bankCard/alphaBank.png') ;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.SBERBANK{
+   background:  url('../../../../images/bankCard/sberBank.png') ;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.GAZPROMBANKOJSC{
+   background:  url('../../../../images/bankCard/gazpromBank.webp') ;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.TINKOFFBANK{
+   background:  url('../../../../images/bankCard/tinkoff.webp') ;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.VNESHTORGBANK{
+   background:  url('../../../../images/bankCard/vtbBank.webp') ;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.CBOTKRITIECJSC{
+   background:  url('../../../../images/bankCard/otkritieBank.png') ;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+
+.JSCBROSBANK{
+   background:  url('../../../../images/bankCard/rosBank.png') ;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
 }
