@@ -1,12 +1,12 @@
 import MainContentImg from '../MainContentImage/MainContentImage'
 
 import MSK from '../../../images/countries/MSK.png'
-import VORZ from '../../../images/countries/VORZ.png'
-import NN from '../../../images/countries/NN.png'
+import SOCHI from '../../../images/countries/sochi.jpg'
+import KAZ from '../../../images/countries/kazan.png'
 import SPB from '../../../images/countries/SPB.png'
 import BARN from '../../../images/countries/barnayl.jpg'
-import SRTV from '../../../images/countries/SRTV.png'
-import { KANADA_TEXT, MALDIVES_TEXT, MRAM_KANYON_TEXT, NIRERLAND_TEXT, NY_TEXT, VENGRIA_TEXT } from '../CountryBlockText/CountryBlockText'
+import VIB from '../../../images/countries/viborg.jpg'
+import { VIBORG_TEXT, SOCHI_TEXT, SPB_TEXT, MSK_TEXT, BARNAYL_TEXT, KAZAN_TEXT } from '../CountryBlockText/CountryBlockText'
 import styles from './CountryBlockGallery.module.scss'
 
 
@@ -18,23 +18,23 @@ export default function CountrieBlockGallery() {
 					limiter= {true}
 					imgSrc={MSK}
 					title="Москва"
-					content__text_subtitle={NIRERLAND_TEXT}
+					content__text_subtitle={MSK_TEXT}
 					value='700'
 				/>
 			</div>
 			<div className={styles.maldives}>
 				<MainContentImg
-					imgSrc={VORZ}
-					title="Воронеж"
-					content__text_subtitle={MALDIVES_TEXT}
+					imgSrc={SOCHI}
+					title="Сочи"
+					content__text_subtitle={SOCHI_TEXT}
 					value='300'
 				/>
 			</div>
 			<div className={styles.vengria}>
 				<MainContentImg
-					imgSrc={NN}
-					title="Нижний новгород"
-					content__text_subtitle={VENGRIA_TEXT}
+					imgSrc={KAZ}
+					title="Казань"
+					content__text_subtitle={KAZAN_TEXT}
 					value='540'
 				/>
 			</div>
@@ -43,7 +43,7 @@ export default function CountrieBlockGallery() {
 					limiter={true}
 					imgSrc={SPB}
 					title="Санкт-Петербург"
-					content__text_subtitle={MRAM_KANYON_TEXT}
+					content__text_subtitle={SPB_TEXT}
 					value='100'
 					link={'/saint_petersburg'}
 					orderLink={'/saint_petersburg#order_ticketSPB'}
@@ -51,17 +51,17 @@ export default function CountrieBlockGallery() {
 			</div>
 			<div className={styles.newYork}>
 				<MainContentImg
-					// imgSrc={BARN}
+					imgSrc={BARN}
 					title="Барнаул"
-					content__text_subtitle={NY_TEXT}
+					content__text_subtitle={BARNAYL_TEXT}
 					value='450'
 				/>
 			</div>
 			<div className={styles.kanada}>
 				<MainContentImg
-					imgSrc={SRTV}
-					title="Саратов"
-					content__text_subtitle={KANADA_TEXT}
+					imgSrc={VIB}
+					title="Выборг"
+					content__text_subtitle={VIBORG_TEXT}
 					value='465'
 				/>
 			</div>
