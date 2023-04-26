@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Modal } from '@mui/material';
 import Cookies from 'universal-cookie'
 import Link from 'next/link'
-import { MainPageTransitions } from './NavLinks'
+import { MainPageTransitions, OrderTicketTransition } from './NavLinks'
 import AccordionBlock from '../../Accardion/Accardion'
 import ModalBody from './ModalWindow/NavModalBody'
 import { toggleNavOpen } from '@/redux/slices/openNav'
@@ -44,10 +44,16 @@ export default function NavBody() {
 					/>
 				</div>
 				<div className={styles.nav_phones__body_item}>
+					<AccordionBlock
+						title="Заказать билет"
+						content={<OrderTicketTransition />}
+					/>
+				</div>
+				<div className={styles.nav_phones__body_item}>
 				</div>
 				<div
 					onClick={() => dispatch(toggleNavOpen())}
-					className={`${styles.nav_phones__body_item}`}
+					className={styles.nav_phones__body_item}
 				>
 					{
 						isLogin

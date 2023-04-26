@@ -139,9 +139,9 @@ app.prepare()
            
         })
 
-        server.post('/saint_petersburg', (req, res)=> {
+        server.post('/order_ticket', (req, res)=> {
             const ticket = {
-                name: 'Санкт-Петербург',
+                name: req.body.name,
                 personNumber: req.body.personNumber,
                 dateFrom: req.body.dateFrom,
                 dateCome:req.body.dateCome,
@@ -162,7 +162,10 @@ app.prepare()
                    
 
             }catch(e){
-                console.log(e)
+                res.status(200).send({
+                    message:  'Не удалось заказать билет заказан',
+                    color:'rgb(208, 97, 97)'
+                  })
             }
         })
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import Head from 'next/head'
 import MainPage from "../../layout/MainPage"
@@ -19,15 +19,14 @@ import Input from '@/components/Input/Input'
 import { Button } from '@/components/Button/Button'
 import styles from './styles.module.scss'
 import Loader from '@/components/Loader/Loader'
+import { setColor, setMessage, removeColor, removeMessage } from '@/redux/slices/AppMessage'
 
 export default function Saint_petersburg(){
 
    const currentDate =new Date()
    
    const isLogin = useSelector(state => state.isAuth.isAuth)
-   const [serverResult, setServerResult] = useState(null)
    const [loadind, setLoading] = useState(false)
-   const [serverError, setServerError] = useState(null)
    const [userEmail,setUserEmail] = useState('')
    const [price, setPrice] = useState(5000)
    const [personNum, setPersonNum] = useState(1)
@@ -37,10 +36,17 @@ export default function Saint_petersburg(){
    const [isValidMinusButton, setValidMinusButton] = useState(false)
    const pageWidth = useWindowWidth()
    const maxDate = new Date(new Date().setDate( new Date().getDate() + 30)) 
+   const [creditCard, setCreditCard] = useState(null)
+
+
+   const dispatch = useDispatch()
 
    useEffect(()=>{
          axios.get('http://localhost:3000/user')
-         .then(result => setUserEmail(result.data.email) )
+         .then(result => {
+            setUserEmail(result.data.email)
+            setCreditCard(localStorage.getItem('AiW_Credit_Card'))
+         })
          .catch(e => console.log(e))
    }, [])
 
@@ -97,9 +103,10 @@ export default function Saint_petersburg(){
 
       const configuration = {
          method:'post',
-         url:'http://localhost:3000/saint_petersburg',
+         url:'http://localhost:3000/order_ticket',
          data:{
             email: userEmail,
+            name:'Санкт-Петербург',
             personNumber: personNum,
             dateFrom: ticketDate,
             dateCome: resaltReturnDate,
@@ -108,18 +115,24 @@ export default function Saint_petersburg(){
       }
 
       axios(configuration)
-      .then(result => 
-         setServerResult(result.data),
-         setAccept(false),
-         setServerError(null),
-         setPersonNum(1),
-         setPrice(5000),
+      .then(result => {
+         dispatch(setMessage(result.data.message))
+         dispatch(setColor(result.data.color))
+         setTimeout(()=> {
+            dispatch(removeMessage())
+            dispatch(removeColor())
+         }, 3000)
+         setAccept(false)
+         setPersonNum(1)
+         setPrice(5000)
          setDate(currentDate.toJSON().slice(0, 10))
+      }
+        
       )
       .catch(err => {
-        setServerError(err)
+         console.log(err);
       })
-      .finally(setLoading(false))
+      .finally(() => setLoading(false))
    }
 
  
@@ -227,7 +240,7 @@ export default function Saint_petersburg(){
                         </div>
                      </div>
                      <div className={styles.row}  >
-                           <div className={styles.col} id='order_ticketSPB' >
+                           <div className={styles.col} id='order_ticket' >
                               <h3>Заказать билет</h3>
                               <div className={styles.attention} >
                                  <p>Поездка занимает три дня</p>
@@ -238,6 +251,19 @@ export default function Saint_petersburg(){
                                     <br/>
                                     (номер вмещает в себя 5 человек)
                                  </p>
+                                 {
+                                    isLogin
+                                    ?
+                                       creditCard
+                                       ? null
+                                       : <p>Чтобы купить билет, привяжите в личном кабинете банковскую карту</p>
+                                    : 
+                                    <>
+                                     <p>Для приобретения билета нужно зарегистрироваться или войти в систему</p>  
+                                     <p>Чтобы купить билет, привяжите в личном кабинете банковскую карту</p>
+                                    </>
+                                   
+                                 }
                               </div>
                               <form  className={styles.ticket_order__form} onSubmit={handleSubmit} >
                                  <div className={styles.inputBox}>
@@ -300,21 +326,14 @@ export default function Saint_petersburg(){
                                  </div>
                                  <Button
                                     className={
-                                       isLogin
+                                       isLogin && creditCard
                                        ?   styles.button
                                        :  styles.disabled
                                     }
-                                    disabled = {!isLogin}
+                                    disabled = {!isLogin || !creditCard}
                                     title={loadind ? <Loader/> : 'Заказать билет'}
                                     type='submit'
                                  />
-                                 <div className={styles.result} >
-                                    {
-                                       serverResult
-                                       ? <div>Вы успешно приобрели билет</div>
-                                       :<div>{serverError}</div>
-                                    }
-                                 </div>
                               </form>
                            </div>
                      </div>

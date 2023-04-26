@@ -53,6 +53,8 @@
             grid-template-rows: 1fr; 
             gap: 20px 20px; 
             justify-items: center;
+            height: 400px;
+            overflow-y: auto;
          }
 
          &__loader{

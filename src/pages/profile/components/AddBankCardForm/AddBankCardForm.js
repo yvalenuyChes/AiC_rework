@@ -9,6 +9,13 @@ import { setColor, setMessage, removeColor, removeMessage } from "@/redux/slices
 import Loader from "@/components/Loader/Loader"
 
 export const AddBankCardForm = ({userEmail, setAddBankCard}) => {
+
+
+ //!!!!!!!!!!!!!!!!!!! СТРАННЫЙ БАГ, ПРИ ПЕРЕХОДЕ ИЗ ФОРМЫ ЗАКАЗА БИЛЕТА КАРТА НЕ ПОДГРУЖАЕТСЯ ПРИ ЗАПОЛНЕНИИ 
+
+
+
+
    const [cardData, setCardData] = useState(null)
 
    const [holderName, setHolderName] = useState('')
@@ -92,8 +99,8 @@ export const AddBankCardForm = ({userEmail, setAddBankCard}) => {
          url:'http://localhost:3000/add_card',
          data:{
             email: userEmail,
-            cardNumber,
-            holderName,
+            cardNumber:cardNumber.trim(),
+            holderName:holderName.trim(),
             bankName: 
             cardData.BIN.issuer.name.split(' ').join('').substring(34,42) === "SBERBANK" 
             ? cardData.BIN.issuer.name.split(' ').join('').substring(34,42)
@@ -110,6 +117,7 @@ export const AddBankCardForm = ({userEmail, setAddBankCard}) => {
          dispatch(setColor(`${result.data.color}`))
          if(result.data.message === 'Вы успешно привязали карту'){
             setAddBankCard(false)
+            localStorage.setItem('AiW_Credit_Card', `${cardNumber.trim()}` )
          }
       })
       .then(
@@ -152,6 +160,7 @@ export const AddBankCardForm = ({userEmail, setAddBankCard}) => {
          onSubmit={handleSubmit}
          >
          <Input
+            autoFocus={true}
             type="number"
             label="Номер карты"
             value={cardNumber}
@@ -167,11 +176,11 @@ export const AddBankCardForm = ({userEmail, setAddBankCard}) => {
             onChange={holderNameHandler}
          />
          <button 
-         disabled={loading || cardNumber === '' || holderName === ''|| cardError
+         disabled={loading || cardNumber.length < 16 || holderName === ''|| cardError
          }  
          className={ 
             loading || 
-            cardNumber === '' || 
+            cardNumber.length < 16 || 
             holderName === '' || 
             cardError ? styles.button__disabled :  styles.button  
          } 

@@ -16,7 +16,8 @@ export default function Input(
 		readOnly,
 		required,
 		maxLength,
-		onPaste
+		onPaste,
+		autoFocus
 	}
 ) {
 	const [isFocus, changeFocus] = useState(false)
@@ -58,6 +59,7 @@ export default function Input(
 						? event => event.preventDefault()
 						: () => false
 					}
+					autoFocus={autoFocus}
 				/>
 			</div>
 		</>

@@ -8,9 +8,10 @@ import { AddBankCardForm } from './components/AddBankCardForm/AddBankCardForm'
 import { SmallBankCard } from './components/SmallBankCard/SmallBankCard'
 import Loader from '@/components/Loader/Loader'
 import styles from './styles.module.scss'
+import Link from 'next/link'
 
 
-
+//!!!!!!!!!!!!!!!!!!!!! Поставь фон для карточек, чтобы при медленной загрузке было понятно, что за карточка
 
 export default function Profile(){
 
@@ -25,9 +26,6 @@ export default function Profile(){
          .catch(e => console.log(e))
    }, [addBankCard, reloadCards])
 
-
-   const test = 'SAVINGSBANKOFTHERUSSIANFEDERATION(SBERBANK)'
-   console.log(test);
 
    return(
       <MainPage>
@@ -48,6 +46,7 @@ export default function Profile(){
            
              <div className={styles.profile__tickets} >
                <h3 className={styles.profile__tickets_title} >Ваши билеты</h3>
+               <h4>Действующие билеты</h4>
                <div>
                   {
                   user.tickets
@@ -78,6 +77,7 @@ export default function Profile(){
                   
                   }
                </div>
+               <Link href={'/used_tickets'}  >Использованные билеты</Link>
              </div>
              <div className={styles.user_pay_card} >
                <h3 className={styles.user_pay_card__title} >Ваши банковские карты</h3>

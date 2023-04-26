@@ -19,7 +19,7 @@ export const AppMessage = () => {
             {message}
          </div>
          
-         : null
+        : null
      
    )
 }

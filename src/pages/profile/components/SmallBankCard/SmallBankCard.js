@@ -36,7 +36,7 @@ export const SmallBankCard = ({
          dispatch(setMessage(`${result.data.message}`))
          dispatch(setColor(`${result.data.color}`))
          setReloadCards(new Date())
-         console.log(new Date())
+         localStorage.removeItem('AiW_Credit_Card')
       })
       .then(setTimeout(()=> {
          dispatch(removeMessage())
@@ -46,9 +46,18 @@ export const SmallBankCard = ({
       .finally(() => setLoading(false))
    }
 
+   const selectDefoultCard = () => {
+      localStorage.setItem('AiW_Credit_Card', number)
+      setReloadCards(new Date())
+   }
+
    return(
       <div
-      className={styles.smallBankCard + ' ' + styles[bank] }>
+      className={
+         number == localStorage.getItem('AiW_Credit_Card')
+         ?   styles.smallBankCard + ' ' + styles[bank] + ' ' + styles.selectedCard
+         :   styles.smallBankCard + ' ' + styles[bank] 
+         }>
          {
             loading
             ? <div className={styles.smallBankCard__loader} ><Loader/></div>
@@ -57,14 +66,15 @@ export const SmallBankCard = ({
             <>
                <div className={styles.smallBankCard_number} > **** {number.substring(number.length - 4)} </div>
                <div
-               className={styles.smallBankCard_brand + ' ' + styles[brand]}
+               className={styles.smallBankCard_brand + ' ' + styles[brand]
+               }
                />
                <div className={styles.smallBankCard_buttons} >
                   <button 
-                  className={styles.smallBankCard__select}
-                  
+                  className={styles.smallBankCard__select + ' ' + styles.smallBankCard__button}
+                  onClick={selectDefoultCard}
                   >Выбрать для оплаты</button>
-                  <button className={styles.smallBankCard__remove} 
+                  <button className={styles.smallBankCard__remove + ' ' + styles.smallBankCard__button} 
                   onClick={removeCardHandler}
                   >Удалить карту</button>
                </div>
