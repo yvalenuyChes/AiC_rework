@@ -61,7 +61,7 @@ export function OrderTicketTransition() {
 				onClick={() => {dispatch(toggleNavOpen())}}
 			>
 				<Link
-					href='/moskow#order_ticket'>
+					href='/cities/moscow#moscow_order_ticket'>
 						Москва
 				</Link>
 			</li>
@@ -70,43 +70,43 @@ export function OrderTicketTransition() {
 				onClick={() => {dispatch(toggleNavOpen())}}
 			>
 				<Link
-					href='saint_petersburg#order_ticket'>
+					href='/cities/saint_petersburg#spb_order_ticket'>
 						Санкт-Петербург
 				</Link>
 			</li>
 			<li
 				className="navMobileLink"
-				onClick={() => dispatch({ type: 'TOGGLE_NAV' })}
+				onClick={() => {dispatch(toggleNavOpen())}}
 			>
 				<Link
-					href='/viborg#order_ticket'>
+					href='/cities/viborg#viborg_order_ticket'>
 						Выборг
 				</Link>
 			</li>
 			<li
 				className="navMobileLink"
-				onClick={() => dispatch({ type: 'TOGGLE_NAV' })}
+				onClick={() => {dispatch(toggleNavOpen())}}
 			>
 				<Link
-					href='/kazan#order_ticket'>
+					href='/cities/kazan#kazan_order_ticket'>
 						Казань
 				</Link>
 			</li>
 			<li
 				className="navMobileLink"
-				onClick={() => dispatch({ type: 'TOGGLE_NAV' })}
+				onClick={() => {dispatch(toggleNavOpen())}}
 			>
 				<Link
-					href='/sochi#order_ticket'>
+					href='/cities/sochi#sochi_order_ticket'>
 						Сочи
 				</Link>
 			</li>
 			<li
 				className="navMobileLink"
-				onClick={() => dispatch({ type: 'TOGGLE_NAV' })}
+				onClick={() => {dispatch(toggleNavOpen())}}
 			>
 				<Link
-					href='/barnayl#order_ticket'>
+					href='/cities/barnayl#barnayl_order_ticket'>
 						Барнаул
 				</Link>
 			</li>

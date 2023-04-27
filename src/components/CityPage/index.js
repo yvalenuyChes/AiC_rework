@@ -7,43 +7,48 @@ import useWindowWidth from '../../custumHooks/useWindowWidth'
 // import ParralaxKanada from '../../components/CityPageComponents/Parralax/Parralax'
 import SlidingSlider from '../../components/CityPageComponents/Sliding slider/SlidingSlider'
 import Card from '../../components/CityPageComponents/Card/Card'
-import {
-	FIFTH_TEXT_ITEM,
-	FIRST_TEXT_ITEM,
-	FOURTH_TEXT_ITEM,
-	SECOND_TEXT_ITEM,
-	SIXTH_TEXT_ITEM,
-	THIRD_TEXT_ITEM
-} from '../../components/CityPageComponents/CountriesPageText/moscow_text'
 import Input from '@/components/Input/Input'
 import { Button } from '@/components/Button/Button'
 import styles from './styles.module.scss'
 import Loader from '@/components/Loader/Loader'
 import { setColor, setMessage, removeColor, removeMessage } from '@/redux/slices/AppMessage'
 
-export default function Saint_petersburg(){
+
+export default function CityPage({
+   cityName,
+   cityNameEng,
+   firstImage, firstTitle,  firstText, firstCardImage,
+   secondImage, secondTitle, secondText, secondCardImage,
+   thirdImage, thirdTitle, thirdText, thirdCardImage, 
+   fourthImage, fourthTitle, fourthText, fourthCardImage,
+   fifthImage, fifthTitle, fifthText, fifthCardImage,
+   sixthImage, sixthTitle, sixthText, sixthCardImage,
+
+   ticketPrice = 10000,
+   hotelPrice  = 6000,
+}){
 
    const currentDate =new Date()
    
    const isLogin = useSelector(state => state.isAuth.isAuth)
    const [loadind, setLoading] = useState(false)
    const [userEmail,setUserEmail] = useState('')
-   const [price, setPrice] = useState(5000)
+   const [price, setPrice] = useState(ticketPrice)
    const [personNum, setPersonNum] = useState(1)
    const [date, setDate] = useState(currentDate.toJSON().slice(0, 10))
    const [accept, setAccept] = useState(false)
    const [isValidPlusButton, setValidPlusButton] = useState(true)
    const [isValidMinusButton, setValidMinusButton] = useState(false)
-   const pageWidth = useWindowWidth()
    const maxDate = new Date(new Date().setDate( new Date().getDate() + 30)) 
    const [creditCard, setCreditCard] = useState(null)
 
 
    const dispatch = useDispatch()
 
+   const pageWidth = useWindowWidth()
+
    useEffect(()=>{
-         axios.get('http://localhost:3000/user')
-         .then(result => {
+         axios.get('http://localhost:3000/user').then(result => {
             setUserEmail(result.data.email)
             setCreditCard(localStorage.getItem('AiW_Credit_Card'))
          })
@@ -58,9 +63,9 @@ export default function Saint_petersburg(){
 
    const handlePrice = () => {
       if(!accept){
-         setPrice(prev => prev + 6000 )
+         setPrice(prev => prev + hotelPrice )
       }else{
-         setPrice(prev => prev - 6000 )
+         setPrice(prev => prev - hotelPrice )
       }
    }
 
@@ -77,12 +82,12 @@ export default function Saint_petersburg(){
 
    const handleButtonIncrease = () => {
       setPersonNum(prev => prev + 1)
-      setPrice(prev => prev + 5000)
+      setPrice(prev => prev + ticketPrice)
    }
 
    const handleButtonSub = () => {
       setPersonNum(prev => prev - 1)
-      setPrice(prev => prev - 5000)
+      setPrice(prev => prev - ticketPrice)
    }
 
    const handleAccept = () => {
@@ -106,7 +111,7 @@ export default function Saint_petersburg(){
          url:'http://localhost:3000/order_ticket',
          data:{
             email: userEmail,
-            name:'Санкт-Петербург',
+            name:`${cityName}`,
             personNumber: personNum,
             dateFrom: ticketDate,
             dateCome: resaltReturnDate,
@@ -144,95 +149,95 @@ export default function Saint_petersburg(){
    return(
       <MainPage>
       <Head>
-         <title>Санкт-Петербург</title>
+         <title>{cityName}</title>
       </Head>
       <section className={styles.wrapper}>
          {/* <ParralaxKanada /> */}
          <div className={styles.content_paralax}>
             <div className={styles.content__body}>
-               <div className={styles.content__header} id="kanada_header">
-                  <h1 className={styles.content__title}>Санкт-Петербург</h1>
+               <div className={styles.content__header} id={`${cityNameEng}_header`}>
+                  <h1 className={styles.content__title}>{cityName}</h1>
                   <h2 className={styles.content__subtitle}>Мы покажем лучшие места этого прекрасного города</h2>
                </div>
                <div className={styles.content__article}>
                   <div className={styles.content__main}>
                      <div className={styles.row}>
-                        <div className={styles.col} id="kanada_kitchen">
+                        <div className={styles.col} id={`${cityNameEng}_kitchen`}>
                            <h3>Рестораны</h3>
                            {pageWidth > 1000
                               ? <section className={styles.content_img}>
                                  <SlidingSlider
-                                    sendClass={styles.kitchenFirstImage}
-                                    title="Традиционный гуляш"
-                                    subtitle={FIRST_TEXT_ITEM}
+                                    sendClass={firstImage}
+                                    title={`${firstTitle}`}
+                                    subtitle={`${firstText}`}
                                  />
                                  <SlidingSlider
-                                    sendClass={styles.kitchenSecondImage}
-                                    title="Канадский завтрак"
-                                    subtitle={SECOND_TEXT_ITEM}
+                                    sendClass={secondImage}
+                                    title= {`${secondTitle}`}
+                                    subtitle={`${secondText}`}
                                  />
                                  <SlidingSlider
-                                    sendClass={styles.kitchenThirdImage}
-                                    title="Кленовый сироп"
-                                    subtitle={THIRD_TEXT_ITEM}
+                                    sendClass={thirdImage}
+                                    title={`${thirdTitle}`}
+                                    subtitle={thirdText}
                                  />
                               </section>
                               : <section className={styles.wrapperCards}>
                                  <Card
-                                    idCard={styles.firstCardItem}
-                                    title='Традиционный гуляш'
-                                    subtitle={FIRST_TEXT_ITEM}
+                                    idCard={firstCardImage}
+                                    title= {`${firstTitle}`}
+                                    subtitle={`${firstText}`}
                                  />
                                  <Card
-                                    idCard={styles.secondCardItem}
-                                    title='Канадский завтрак'
-                                    subtitle={SECOND_TEXT_ITEM}
+                                    idCard={secondCardImage}
+                                    title= {`${secondTitle}`}
+                                    subtitle={`${secondText}`}
                                  />
                                  <Card
-                                    idCard={styles.thirdCardItem}
-                                    title='Кленовый сироп'
-                                    subtitle={THIRD_TEXT_ITEM}
+                                    idCard={thirdCardImage}
+                                    title={`${thirdTitle}`}
+                                    subtitle={`${thirdText}`}
                                  />
                               </section>
                            }
                         </div>
                      </div>
                      <div className={styles.row}>
-                        <div className={styles.col} id="kanada_interesting_places">
+                        <div className={styles.col} id={`${cityNameEng}_interesting_places`}>
                            <h3>Достопримечательности</h3>
                            {pageWidth > 1000
                               ? <section className={styles.content_img}>
                                  <SlidingSlider
-                                    sendClass={styles.interestingfirstImage}
-                                    title="Ниагарский водопад"
-                                    subtitle={FOURTH_TEXT_ITEM}
+                                    sendClass={fourthImage}
+                                    title={`${fourthTitle}`}
+                                    subtitle={`${fourthText}`}
                                  />
                                  <SlidingSlider
-                                    sendClass={styles.interestingSecondImage}
-                                    title="Парламентский холм (Оттава)"
-                                    subtitle={FIFTH_TEXT_ITEM}
+                                    sendClass={fifthImage}
+                                    title={`${fifthTitle}`}
+                                    subtitle={`${fifthText}`}
                                  />
                                  <SlidingSlider
-                                    sendClass={styles.interestingThirdImage}
-                                    title="Парк Стэнли (Ванкувер)"
-                                    subtitle={SIXTH_TEXT_ITEM}
+                                    sendClass={sixthImage}
+                                    title= {`${sixthTitle}`}
+                                    subtitle={`${sixthText}`}
                                  />
                               </section>
                               : <section className={styles.wrapperCards}>
                                  <Card
-                                    idCard={styles.fourthCardItem}
-                                    title='Ниагарский водопад'
-                                    subtitle={FOURTH_TEXT_ITEM}
+                                    idCard={fourthCardImage}
+                                    title={`${fourthTitle}`}
+                                    subtitle={`${fourthText}`}
                                  />
                                  <Card
-                                    idCard={styles.fifthCardItem}
-                                    title='Парламентский холм (Оттава)'
-                                    subtitle={FIFTH_TEXT_ITEM}
+                                    idCard={fifthCardImage}
+                                    title={`${fifthTitle}`}
+                                    subtitle={`${fifthText}`}
                                  />
                                  <Card
-                                    idCard={styles.sixthCardItem}
-                                    title='Парк Стэнли (Ванкувер)'
-                                    subtitle={SIXTH_TEXT_ITEM}
+                                    idCard={sixthCardImage}
+                                    title={`${sixthTitle}`}
+                                    subtitle={`${sixthText}`}
                                  />
                               </section>
 
@@ -240,7 +245,7 @@ export default function Saint_petersburg(){
                         </div>
                      </div>
                      <div className={styles.row}  >
-                           <div className={styles.col} id='order_ticket' >
+                           <div className={styles.col} id={`${cityNameEng}_order_ticket`} >
                               <h3>Заказать билет</h3>
                               <div className={styles.attention} >
                                  <p>Поездка занимает три дня</p>
@@ -344,4 +349,5 @@ export default function Saint_petersburg(){
       </section>
    </MainPage>
    )
+
 }

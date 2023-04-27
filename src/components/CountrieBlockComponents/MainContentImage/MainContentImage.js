@@ -21,15 +21,17 @@ export default function MainContentImg({
 	const [price, setPrice] = useState()
 
 
-	const RUB_URL = 'https://www.cbr-xml-daily.ru/daily_json.js'
-	async function getRubValue() {
-		const dataRub = await axios.get(RUB_URL)
-		setPrice(Math.floor(dataRub.data.Valute.USD.Value))
-	}
+	
 
 	useEffect(() => {
-		getRubValue()
-	})
+		axios
+		.get('https://www.cbr-xml-daily.ru/daily_json.js')
+		.then( result=> {
+			setPrice(Math.floor(result.data.Valute.USD.Value))
+		})
+		.catch(e => console.log(e))
+		
+	}, [])
 
 	return (
 		<div className={ 

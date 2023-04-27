@@ -1,0 +1,56 @@
+@import '../../../styles/mixins';
+
+
+.kitchenFirstImage{
+	background-image: url(../../../images/cityImages/barnayl/rest1.jpg);
+}
+
+.kitchenSecondImage{
+	background-image: url(../../../images/cityImages/barnayl/rest2.jpg);
+}
+
+.kitchenThirdImage{
+	background-image: url(../../../images/cityImages/barnayl/rest3.jpg);
+}
+
+.interestingFirstImage{
+	background-image: url(../../../images/cityImages/barnayl/apteka.jpg);
+}
+
+.interestingSecondImage{
+	background-image: url(../../../images/cityImages/barnayl/museum.jpg);
+}
+
+.interestingThirdImage{
+	background-image: url(../../../images/cityImages/barnayl/wremya.jpg);
+}
+
+#firstCardItem{
+	background: url(../../../images/cityImages/barnayl/rest1.jpg) no-repeat;
+	@include cardImg;
+}
+
+#secondCardItem{
+	background: url(../../../images/cityImages/barnayl/rest2.jpg) no-repeat;
+	@include cardImg;
+}
+
+#thirdCardItem{
+	background: url(../../../images/cityImages/barnayl/rest3.jpg) no-repeat;
+	@include cardImg;
+}
+
+#fourthCardItem{
+	background: url(../../../images/cityImages/barnayl/apteka.jpg) no-repeat;
+	@include cardImg;
+}
+
+#fifthCardItem{
+	background: url(../../../images/cityImages/barnayl/museum.jpg) no-repeat;
+	@include cardImg;
+}
+
+#sixthCardItem{
+	background: url(../../../images/cityImages/barnayl/wremya.jpg) no-repeat;
+	@include cardImg;
+}

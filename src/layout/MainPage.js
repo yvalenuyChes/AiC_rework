@@ -53,7 +53,7 @@ export default function MainPage({ children }) {
 		return () => {
 			window.removeEventListener('scroll', handleScroll)
 		}
-	})
+	}, [navOpen])
 
 	return (
 		<>

@@ -3,6 +3,8 @@ import classes from './ButtonToTop.module.scss'
 
 export default function ButtonToTop() {
 
+	const getTop = () => window.pageYOffset || document.documentElement.scrollTop
+
 	useEffect(() => {
 		const offset = 100
 		const scrollUp = document.querySelector(`.${classes.scroll_up}`)
@@ -10,7 +12,6 @@ export default function ButtonToTop() {
 		const pathLength = scrollUpSvgPath.getTotalLength()
 		scrollUpSvgPath.style.strokeDasharray = `${pathLength} ${pathLength}`
 		scrollUpSvgPath.style.transition = 'stroke-dashoffset 20ms'
-		const getTop = () => window.pageYOffset || document.documentElement.scrollTop
 		const Height = document.documentElement.scrollHeight - window.innerHeight
 		const updateDashoffset = () => {
 			const dashoffset = pathLength - (getTop() * pathLength / Height)
@@ -22,7 +23,7 @@ export default function ButtonToTop() {
 			scrollUp.classList.remove(`${classes.active}`)
 		}
 		updateDashoffset()
-	})
+	}, [getTop])
 
 
 	return (

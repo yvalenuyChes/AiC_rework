@@ -1,9 +1,14 @@
+import { useDispatch } from 'react-redux'
+
 import {Tabs} from '../../../Tabs/Tabs'
 import { togglePopup } from '@/redux/slices/openPopup'
 
 import styles from './NavModalBody.module.scss'
 
+
 function ModalBody() {
+
+	const dispatch = useDispatch()
 
 	return (
 		<>

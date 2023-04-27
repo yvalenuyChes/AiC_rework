@@ -1,31 +1,14 @@
 @import '../../styles/mixins';
-// .wrapper{
-//    width: 100%;
-// }
 
-// .page{
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   top: 0;
-//   left: 0;
+.wrapper{
+	@include container;
 
-//   .paralax{
-//      position: relative;
-//      height: 100%;
-
-//   }
-// }
+}
 
 .content{
 
 	z-index:10;
 }
-
-// .content_paralax{
-// 	display: block;
-// 	height: 2000px;
-// }
 
 .content__title{
 	text-align: center;
@@ -52,10 +35,6 @@
 	margin-top: 100px;
 }
 
-// .col span{
-// 	margin-top: 100px;
-// }
-
 .row{
 	padding: 0;
 }
@@ -75,61 +54,6 @@
 	display: flex;
 	border: 1px solid gray;
 	margin: 0 auto;
-}
-
-
-.kitchenFirstImage{
-	background: url(../../images/kanadaImg/kitchen/1.png) no-repeat;
-}
-
-.kitchenSecondImage{
-	background: url(../../images/kanadaImg/kitchen/2.png) no-repeat;
-}
-
-.kitchenThirdImage{
-	background: url(../../images/kanadaImg/kitchen/3.png) no-repeat;
-}
-
-.interestingfirstImage{
-	background: url(../../images/kanadaImg/intresting/1.png) no-repeat;
-}
-
-.interestingSecondImage{
-	background: url(../../images/kanadaImg/intresting/2.png);
-}
-
-.interestingThirdImage{
-	background: url(../../images/kanadaImg/intresting/3.png) no-repeat;
-}
-
-#firstCardItem{
-	background: url(../../images/kanadaImg/kitchen/1.png) no-repeat;
-	@include cardImg;
-}
-
-#secondCardItem{
-	background: url(../../images/kanadaImg/kitchen/2.png) no-repeat;
-	@include cardImg;
-}
-
-#thirdCardItem{
-	background: url(../../images/kanadaImg/kitchen/3.png) no-repeat;
-	@include cardImg;
-}
-
-#fourthCardItem{
-	background: url(../../images/kanadaImg/intresting/1.png) no-repeat;
-	@include cardImg;
-}
-
-#fifthCardItem{
-	background: url(../../images/kanadaImg/intresting/2.png) no-repeat;
-	@include cardImg;
-}
-
-#sixthCardItem{
-	background: url(../../images/kanadaImg/intresting/3.png) no-repeat;
-	@include cardImg;
 }
 
 .inputBox{
@@ -221,7 +145,7 @@
 
 
 .attention{
-	width: 1200px;
+	max-width: 1200px;
 	margin: 0 auto 50px auto;
 	padding: 30px 100px;
 	text-align: left;

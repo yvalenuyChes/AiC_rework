@@ -19,7 +19,7 @@ export default function HeaderScene() {
 				layer.style.transform = `translateX(${event.clientX * speed / 1000}px)`
 			})
 		})
-	})
+	}, [])
 
 
 	return (

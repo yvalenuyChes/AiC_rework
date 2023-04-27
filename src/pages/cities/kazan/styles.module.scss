@@ -1,0 +1,56 @@
+@import '../../../styles/mixins';
+
+
+.kitchenFirstImage{
+	background-image: url(../../../images/cityImages/kazan/rybai.jpg);
+}
+
+.kitchenSecondImage{
+	background-image: url(../../../images/cityImages/kazan/kremlin.jpg);
+}
+
+.kitchenThirdImage{
+	background-image: url(../../../images/cityImages/kazan/beerhouse.jpg);
+}
+
+.interestingFirstImage{
+	background-image: url(../../../images/cityImages/kazan/castle.jpg);
+}
+
+.interestingSecondImage{
+	background-image: url(../../../images/cityImages/kazan/kreml.jpg);
+}
+
+.interestingThirdImage{
+	background-image: url(../../../images/cityImages/kazan/sobor.jpg);
+}
+
+#firstCardItem{
+	background: url(../../../images/cityImages/kazan/rybai.jpg) no-repeat;
+	@include cardImg;
+}
+
+#secondCardItem{
+	background: url(../../../images/cityImages/kazan/kremlin.jpg) no-repeat;
+	@include cardImg;
+}
+
+#thirdCardItem{
+	background: url(../../../images/cityImages/kazan/beerhouse.jpg) no-repeat;
+	@include cardImg;
+}
+
+#fourthCardItem{
+	background: url(../../../images/cityImages/kazan/castle.jpg) no-repeat;
+	@include cardImg;
+}
+
+#fifthCardItem{
+	background: url(../../../images/cityImages/kazan/kreml.jpg) no-repeat;
+	@include cardImg;
+}
+
+#sixthCardItem{
+	background: url(../../../images/cityImages/kazan/sobor.jpg) no-repeat;
+	@include cardImg;
+}

@@ -20,6 +20,7 @@ export default function CountrieBlockGallery() {
 					title="Москва"
 					content__text_subtitle={MSK_TEXT}
 					value='700'
+					link={'/cities/moscow'}
 				/>
 			</div>
 			<div className={styles.maldives}>
@@ -28,6 +29,7 @@ export default function CountrieBlockGallery() {
 					title="Сочи"
 					content__text_subtitle={SOCHI_TEXT}
 					value='300'
+					link={'/cities/sochi'}
 				/>
 			</div>
 			<div className={styles.vengria}>
@@ -36,6 +38,7 @@ export default function CountrieBlockGallery() {
 					title="Казань"
 					content__text_subtitle={KAZAN_TEXT}
 					value='540'
+					link={'/cities/kazan'}
 				/>
 			</div>
 			<div className={styles.mram}>
@@ -45,7 +48,7 @@ export default function CountrieBlockGallery() {
 					title="Санкт-Петербург"
 					content__text_subtitle={SPB_TEXT}
 					value='100'
-					link={'/saint_petersburg'}
+					link={'/cities/saint_petersburg'}
 					orderLink={'/saint_petersburg#order_ticketSPB'}
 				/>
 			</div>
@@ -55,6 +58,7 @@ export default function CountrieBlockGallery() {
 					title="Барнаул"
 					content__text_subtitle={BARNAYL_TEXT}
 					value='450'
+					link={'/cities/barnayl'}
 				/>
 			</div>
 			<div className={styles.kanada}>
@@ -63,6 +67,7 @@ export default function CountrieBlockGallery() {
 					title="Выборг"
 					content__text_subtitle={VIBORG_TEXT}
 					value='465'
+					link={'/cities/viborg'}
 				/>
 			</div>
 		</div>

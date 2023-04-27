@@ -1,0 +1,56 @@
+@import '../../../styles/mixins';
+
+
+.kitchenFirstImage{
+	background-image: url(../../../images/cityImages/spb/rest1.jpg);
+}
+
+.kitchenSecondImage{
+	background-image: url(../../../images/cityImages/spb/rest2.jpg);
+}
+
+.kitchenThirdImage{
+	background-image: url(../../../images/cityImages/spb/rest3.jpg);
+}
+
+.interestingFirstImage{
+	background-image: url(../../../images/cityImages/spb/faberje.jpg);
+}
+
+.interestingSecondImage{
+	background-image: url(../../../images/cityImages/spb/isak.jpg);
+}
+
+.interestingThirdImage{
+	background-image: url(../../../images/cityImages/spb/orienbaum.jpg);
+}
+
+#firstCardItem{
+	background: url(../../../images/cityImages/spb/rest1.jpg) no-repeat;
+	@include cardImg;
+}
+
+#secondCardItem{
+	background: url(../../../images/cityImages/spb/rest2.jpg) no-repeat;
+	@include cardImg;
+}
+
+#thirdCardItem{
+	background: url(../../../images/cityImages/spb/rest3.jpg) no-repeat;
+	@include cardImg;
+}
+
+#fourthCardItem{
+	background: url(../../../images/cityImages/spb/faberje.jpg) no-repeat;
+	@include cardImg;
+}
+
+#fifthCardItem{
+	background: url(../../../images/cityImages/spb/isak.jpg) no-repeat;
+	@include cardImg;
+}
+
+#sixthCardItem{
+	background: url(../../../images/cityImages/spb/orienbaum.jpg) no-repeat;
+	@include cardImg;
+}
