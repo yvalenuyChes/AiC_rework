@@ -13,7 +13,7 @@ import styles from './styles.module.scss'
 import Loader from '@/components/Loader/Loader'
 import { setColor, setMessage, removeColor, removeMessage } from '@/redux/slices/AppMessage'
 import { Modal } from '@mui/material'
-import { AddBankCardForm } from '@/pages/profile/components/AddBankCardForm/AddBankCardForm'
+import  AddBankCardForm  from '@/pages/profile/components/AddBankCardForm/AddBankCardForm'
 
 
 export default function CityPage({
@@ -53,7 +53,10 @@ export default function CityPage({
    useEffect(()=>{
          axios.get('http://localhost:3000/user').then(result => {
             setUserEmail(result.data.email)
-            setCreditCard(localStorage.getItem('AiW_Credit_Card'))
+            if(window !== undefined){
+               setCreditCard(localStorage.getItem('AiW_Credit_Card'))
+            }
+          
          })
          .catch(e => console.log(e))
    }, [])

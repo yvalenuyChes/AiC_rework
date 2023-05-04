@@ -1,7 +1,7 @@
 import Loader from "@/components/Loader/Loader"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { Ticket } from "../profile/components/Ticket/Ticket"
+import  Ticket  from "../profile/components/Ticket/Ticket"
 import MainPage from "@/layout/MainPage"
 import styles from './styles.module.scss'
 

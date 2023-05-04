@@ -2,13 +2,13 @@ import moment from 'moment'
 
 import styles from './style.module.scss'
 
-export const Ticket = ({
+export default function Ticket({
    city,
    personNumber,
    dateFrom,
    dateCome,
    price
-}) =>{
+}){
    return(
       <div className={styles.ticket} >
          <h4 className={styles.ticket__title} >Билет в {city}</h4>

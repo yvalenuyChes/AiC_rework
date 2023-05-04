@@ -1,23 +1,28 @@
 import { useDispatch } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { setColor, setMessage, removeMessage, removeColor } from '@/redux/slices/AppMessage'
 import axios from 'axios'
 import styles from './styles.module.scss'
 import Loader from '@/components/Loader/Loader'
 
 
-export const SmallBankCard = ({
+export default function SmallBankCard ({
    cardNumber,
    brand,
    bank,
    userEmail,
    setReloadCards
-}) => {
+}) {
 
-   const number = cardNumber.toString()
+   const number =  cardNumber ? cardNumber.toString() : ''
 
    const dispatch = useDispatch()
    const [loading, setLoading] = useState(false)
+   const [AiC_creditCard, setAiC_creditCard] = useState(null)
+
+   useEffect(() => {
+      setAiC_creditCard(localStorage.getItem('AiW_Credit_Card')) 
+   }, [])
 
    const removeCardHandler = () => {
       setLoading(true)
@@ -36,7 +41,10 @@ export const SmallBankCard = ({
          dispatch(setMessage(`${result.data.message}`))
          dispatch(setColor(`${result.data.color}`))
          setReloadCards(new Date())
-         localStorage.removeItem('AiW_Credit_Card')
+         if(window !== undefined){
+            localStorage.removeItem('AiW_Credit_Card')
+         }
+        
       })
       .then(setTimeout(()=> {
          dispatch(removeMessage())
@@ -47,14 +55,17 @@ export const SmallBankCard = ({
    }
 
    const selectDefoultCard = () => {
-      localStorage.setItem('AiW_Credit_Card', number)
+      if(window !== undefined){
+         localStorage.setItem('AiW_Credit_Card', number)
+      }
+    
       setReloadCards(new Date())
    }
 
    return(
       <div
       className={
-         number == localStorage.getItem('AiW_Credit_Card')
+         number == AiC_creditCard
          ?   styles.smallBankCard + ' ' + styles[bank] + ' ' + styles.selectedCard
          :   styles.smallBankCard + ' ' + styles[bank] 
          }>

@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux"
 import { setColor, setMessage, removeColor, removeMessage } from "@/redux/slices/AppMessage"
 import Loader from "@/components/Loader/Loader"
 
-export const AddBankCardForm = ({userEmail, setAddBankCard, setCreditCard}) => {
+export default function AddBankCardForm ({userEmail, setAddBankCard, setCreditCard}) {
 
 
  //!!!!!!!!!!!!!!!!!!! СТРАННЫЙ БАГ, ПРИ ПЕРЕХОДЕ ИЗ ФОРМЫ ЗАКАЗА БИЛЕТА КАРТА НЕ ПОДГРУЖАЕТСЯ ПРИ ЗАПОЛНЕНИИ 
@@ -126,8 +126,11 @@ export const AddBankCardForm = ({userEmail, setAddBankCard, setCreditCard}) => {
          dispatch(setColor(`${result.data.color}`))
          if(result.data.message === 'Вы успешно привязали карту'){
             setAddBankCard(false)
-            localStorage.setItem('AiW_Credit_Card', `${cardNumber.trim()}` )
-            setCreditCard(localStorage.getItem('AiW_Credit_Card'))
+            if(window !== undefined){
+               localStorage.setItem('AiW_Credit_Card', `${cardNumber.trim()}` )
+               setCreditCard(localStorage.getItem('AiW_Credit_Card'))
+            }
+           
          }
       })
       .then(
