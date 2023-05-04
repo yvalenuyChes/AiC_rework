@@ -26,6 +26,23 @@ export default function Profile(){
          .catch(e => console.log(e))
    }, [addBankCard, reloadCards])
 
+   const sendVerifiedLetter = () =>{
+
+      const configuration = {
+         method:'post',
+         url:'http://localhost:3000/send_virified_letter',
+         data:{
+            email:user.email
+         }
+      }
+
+
+      axios(configuration)
+      .then(result => {
+         console.log(result)
+      })
+      .catch(e => console.log(e))
+   }
 
    return(
       <MainPage>
@@ -39,9 +56,13 @@ export default function Profile(){
             <div className={styles.profile_block}>
              <h3 className={styles.profile_title} >Профиль</h3>
              <div className={styles.profile_name}>
-               <h3 className={styles.profile_name_title} >  Ваше имя: {user === '' ?  <Loader/>  : user.name }</h3>
+               <h3 className={styles.profile_name_title} >  Ваше имя: {user === null ?  <Loader/>  : user.name }</h3>
              </div>
-       
+            <div>
+               <p>Ваша почта: {user === null ? <Loader/> : user.email}  </p>
+
+               <button onClick={sendVerifiedLetter} >Подтвердить почту</button>
+            </div>
 
            
              <div className={styles.profile__tickets} >
@@ -56,16 +77,22 @@ export default function Profile(){
                   <div className={styles.profile__tickets_list} >
                      {
                          user.tickets.map((ticket, key) => {
-                           return(
-                              <Ticket
-                                 city={ticket.name}
-                                 personNumber={ticket.personNumber}
-                                 dateFrom={ticket.dateFrom}
-                                 dateCome={ticket.dateCome}
-                                 price={ticket.price}
-                                 key={key}
-                              />
-                           )
+                           
+                           if(ticket.dateCome < (new Date().toISOString()))
+                           {
+                             return null
+                           }else{
+                              return(
+                                 <Ticket
+                                    city={ticket.name}
+                                    personNumber={ticket.personNumber}
+                                    dateFrom={ticket.dateFrom}
+                                    dateCome={ticket.dateCome}
+                                    price={ticket.price}
+                                    key={key}
+                                 />
+                              )
+                           }               
                         })
                      }
                   </div>

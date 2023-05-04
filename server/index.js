@@ -9,8 +9,14 @@ const cors = require('cors')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
+const PORT = process.env.PORT || 3000
 
 const UserSchema = require('./Models/user')
+
+
+const send_verification_letter = require('./routes/send_verification_letter')
+const signup = require('./routes/signup')
+// const login = require('./routes/login')
 
 app.prepare()
     .then(() => {
@@ -29,52 +35,13 @@ app.prepare()
                 console.log('database connected');
              })
 
-        server.post('/signup',  (req,res)=>{
+           
 
-            UserSchema.findOne({email: req.body.email}).then(user=>{
-                if(user){
-                    return res.status(400).send({
-                        message: 'Email уже занят',
-                    })
-                }
-            })
+     
 
+        server.use('/signup',signup)
 
-            bcrypt
-            .hash(req.body.password, 10)
-            .then((hashedPassword)=> {
-                const user = new UserSchema({
-                    name:req.body.name,
-                    email: req.body.email,
-                    password:hashedPassword
-                })
-
-                try{
-                    user.save()
-                    .then( result =>{
-                        res.status(201).send({
-                            message:'User Created Successfully',
-                            result
-                        })
-                    })
-                    .catch(err => {
-                        res.status(500).send({
-                            message:'Ошибка сервера',
-                            err,
-                            color:'rgb(208, 97, 97)'
-                        })
-                    })
-                    
-                }catch(e){
-                    res.status(500).send({
-                        message:'Password was not hashed successfully',
-                        e
-                    })
-                }
-            })
-
-          
-        })
+        server.use('/send_virified_letter', send_verification_letter)
 
 
         server.post('/login', (req,res)=>{
@@ -85,7 +52,6 @@ app.prepare()
                     if(!passwordCheck){
                         return response.status(400).send({
                             message: "Неверный пароль",
-                            // color:'rgb(208, 97, 97)',
                             error,
                           })
                     }
@@ -121,6 +87,14 @@ app.prepare()
             })
         })
 
+        // server.post('/remind_password', (req, res)=>{
+        //     UserSchema.findOne({email:req.body.email})
+        //     .then(user => {
+        //         bcrypt.(user.password, user.password)
+        //         .then()
+        //     })
+        // })
+
         server.get('/user',  (req,res)=> {
             const token = req.headers.cookie
             const cookie = token.slice(6)
@@ -134,9 +108,86 @@ app.prepare()
                     }
                 }
             )
-           
+        })
+
+        server.post('/send_reset_password_code', (req, res)=> {
+            const email = req.body.email
+            UserSchema.findOne({email})
+            .then(user=> {
+                res.status(200).send({
+                    message:'find user'
+                })
+                // const EMAIL_HOST = process.env.SMTP_HOST
+                // const EMAIL_USERNAME = process.env.SMTP_USERNAME
+                // const EMAIL_PASSWORD = process.env.SMTP_PASSWORD
+                //    const transport = nodemailer.createTransport({
+                //        host: EMAIL_HOST,
+                //        port: 2525,
+                //        auth: {
+                //        user: EMAIL_USERNAME,
+                //        pass: EMAIL_PASSWORD
+                //        }
+                //     })
             
-           
+                    
+                //    transport.sendMail({
+                //        from:'aic_test@gmail.com',
+                //        to: user.email,
+                //        subject:'Код для сброса пароля',
+                //        html:`${user.resetPasswordCode}`
+                //     })
+            })
+            .catch(err=> {
+                res.status(404).send({
+                    message:'Почта не найдена',
+                    color: 'rgb(208, 97, 97)',
+                    err
+                })
+            })
+        })
+
+
+        server.post('/verify-reset-password-code', (req, res)=>{
+            const userCode = req.body.send_code
+            const email = req.body.email
+
+            UserSchema.findOne({email})
+            .then(user => {
+                if(user.resetPasswordCode === userCode){
+                    UserSchema.findOneAndUpdate(
+                        {email},
+                        {$set:{resetPasswordCode:Math.floor(100000 + Math.random() * (999999 + 1 - 100000)) }}
+                    )
+                    res.status(200).send({
+                        isCkecked: true
+                    })
+                }else{
+                    res.status(500).send({
+                        message:'Невалидный код',
+                        isCkecked: false
+                    })
+                }
+            })
+        })
+
+
+        server.post('/change-password', (req,res)=> {
+            UserSchema.findOneAndUpdate(
+                {email:req.body.email},
+                {$set:{password:req.body.newPassword}}
+            )
+            .then(() => {
+                res.status(200).send({
+                    message:'Пароль успешно изменен',
+                    color:'rgb(47, 160, 47)'
+                })
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:'Ошибка сервера, проверьте подключение к интернету и повторите попытку',
+                    color:'rgb(208, 97, 97)'
+                })
+            })
         })
 
         server.post('/order_ticket', (req, res)=> {
@@ -163,7 +214,7 @@ app.prepare()
 
             }catch(e){
                 res.status(200).send({
-                    message:  'Не удалось заказать билет заказан',
+                    message:  'Не удалось заказать билет',
                     color:'rgb(208, 97, 97)'
                   })
             }
@@ -171,8 +222,6 @@ app.prepare()
 
         server.post('/add_card', (req,res)=> {
 
-            
-          
             const creditCard = {
                 cardNumber: req.body.cardNumber,
                 holderName: req.body.holderName,
@@ -286,7 +335,7 @@ app.prepare()
             return handle(req, res)
         })
 
-        server.listen(3000, (err) => {
+        server.listen(PORT, (err) => {
             if (err) throw err
             console.log('> Ready on http://localhost:3000')
         })

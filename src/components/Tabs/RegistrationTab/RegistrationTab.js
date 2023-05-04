@@ -53,6 +53,7 @@ const RegistrationTab = () => {
       .then(result => 
          setServerResult(result.data.message), 
          setServerError(null), 
+         
       )
       .catch(err => {
          setServerError(err.response.data.message)

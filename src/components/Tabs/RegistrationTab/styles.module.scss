@@ -155,9 +155,9 @@
    color:white;
    font-size: 14px;
    text-transform: uppercase;
-   display: block;
-   text-align: center;
-   line-height: 48px;
+   display: flex;
+   justify-content: center;
+	align-items: center;
 
 	&_disabled{
 		transition: ease .5s all;

@@ -12,6 +12,8 @@ import { Button } from '@/components/Button/Button'
 import styles from './styles.module.scss'
 import Loader from '@/components/Loader/Loader'
 import { setColor, setMessage, removeColor, removeMessage } from '@/redux/slices/AppMessage'
+import { Modal } from '@mui/material'
+import { AddBankCardForm } from '@/pages/profile/components/AddBankCardForm/AddBankCardForm'
 
 
 export default function CityPage({
@@ -41,6 +43,7 @@ export default function CityPage({
    const [isValidMinusButton, setValidMinusButton] = useState(false)
    const maxDate = new Date(new Date().setDate( new Date().getDate() + 30)) 
    const [creditCard, setCreditCard] = useState(null)
+   const [openPopup, setOpenPopup] = useState(false)
 
 
    const dispatch = useDispatch()
@@ -119,32 +122,39 @@ export default function CityPage({
          }
       }
 
-      axios(configuration)
-      .then(result => {
-         dispatch(setMessage(result.data.message))
-         dispatch(setColor(result.data.color))
-         setTimeout(()=> {
-            dispatch(removeMessage())
-            dispatch(removeColor())
-         }, 3000)
-         setAccept(false)
-         setPersonNum(1)
-         setPrice(5000)
-         setDate(currentDate.toJSON().slice(0, 10))
-      }
-        
-      )
-      .catch(err => {
-         console.log(err);
-      })
-      .finally(() => setLoading(false))
+      creditCard
+      ?
+         axios(configuration)
+         .then(result => {
+            dispatch(setMessage(result.data.message))
+            dispatch(setColor(result.data.color))
+            setTimeout(()=> {
+               dispatch(removeMessage())
+               dispatch(removeColor())
+            }, 3000)
+            setAccept(false)
+            setPersonNum(1)
+            setPrice(5000)
+            setDate(currentDate.toJSON().slice(0, 10))
+         }
+         
+         )
+         .catch(err => {
+            console.log(err);
+         })
+         .finally(() => setLoading(false))
+      :
+         setOpenPopup(true)
+         setLoading(false)
+
+      
    }
 
  
 
 
    
-
+   //!!!!!!!!!! На главной странице слетели размеры картинок, картинки стран
 
    return(
       <MainPage>
@@ -161,6 +171,31 @@ export default function CityPage({
                </div>
                <div className={styles.content__article}>
                   <div className={styles.content__main}>
+                     <Modal
+                        open={openPopup}
+                        
+                     >
+                        <div className={styles.modal__container} >
+                           <div
+                              className={styles.modal__body}
+                           >
+                              <span
+                                 role="button"
+                                 className={styles.popup__close}
+                                 onClick={() => setOpenPopup(!openPopup)}
+                              />
+                              <h4
+                              className={styles.modal__body_title}
+                              >Привязка банковской карты</h4>
+                              <AddBankCardForm
+                                 setAddBankCard={setOpenPopup}
+                                 setCreditCard = {setCreditCard}
+                              />
+                           </div>
+                           
+                        </div>
+                       
+                     </Modal>
                      <div className={styles.row}>
                         <div className={styles.col} id={`${cityNameEng}_kitchen`}>
                            <h3>Рестораны</h3>
@@ -261,7 +296,7 @@ export default function CityPage({
                                     ?
                                        creditCard
                                        ? null
-                                       : <p>Чтобы купить билет, привяжите в личном кабинете банковскую карту</p>
+                                       : <p style={{color:'red'}} >Чтобы купить билет, привяжите в личном кабинете банковскую карту</p>
                                     : 
                                     <>
                                      <p>Для приобретения билета нужно зарегистрироваться или войти в систему</p>  
@@ -331,11 +366,16 @@ export default function CityPage({
                                  </div>
                                  <Button
                                     className={
-                                       isLogin && creditCard
+                                       // isLogin && creditCard
+                                       // ?   styles.button
+                                       // :  styles.disabled
+
+                                       isLogin
                                        ?   styles.button
                                        :  styles.disabled
                                     }
-                                    disabled = {!isLogin || !creditCard}
+                                    // disabled = {!isLogin || !creditCard}
+                                    disabled = {!isLogin}
                                     title={loadind ? <Loader/> : 'Заказать билет'}
                                     type='submit'
                                  />

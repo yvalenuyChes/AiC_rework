@@ -8,6 +8,7 @@ import Input from '../../Input/Input'
 import { togglePopup } from '@/redux/slices/openPopup'
 import styles from './styles.module.scss'
 import { removeColor, removeMessage, setColor, setMessage } from '@/redux/slices/AppMessage'
+import Link from 'next/link'
 
 
 
@@ -112,7 +113,9 @@ export const LoginTab = () => {
                }
             >{ loading ? <Loader/> : 'Войти' }</button>
 
-         <a href="##" className={styles.tab_link}>Я забыл e-mail или пароль</a>
+         <div onClick={() => dispatch(togglePopup())}  >
+            <Link href="/reset-password" className={styles.tab_link} >Я забыл пароль</Link>
+         </div> 
          <div className={styles.popup__errors}>
             {serverError}
          </div>

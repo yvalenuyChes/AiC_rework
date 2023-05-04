@@ -8,15 +8,24 @@ import { useDispatch } from "react-redux"
 import { setColor, setMessage, removeColor, removeMessage } from "@/redux/slices/AppMessage"
 import Loader from "@/components/Loader/Loader"
 
-export const AddBankCardForm = ({userEmail, setAddBankCard}) => {
+export const AddBankCardForm = ({userEmail, setAddBankCard, setCreditCard}) => {
 
 
  //!!!!!!!!!!!!!!!!!!! СТРАННЫЙ БАГ, ПРИ ПЕРЕХОДЕ ИЗ ФОРМЫ ЗАКАЗА БИЛЕТА КАРТА НЕ ПОДГРУЖАЕТСЯ ПРИ ЗАПОЛНЕНИИ 
 
-
+   useEffect(()=> {
+      if(userEmail){
+         setEmail(userEmail)
+      }else{
+         axios.get('http://localhost:3000/user')
+         .then(result => setEmail(result.data.email) )
+         .catch(e => console.log(e))
+      }
+   }, [])
 
 
    const [cardData, setCardData] = useState(null)
+   const [email, setEmail] = useState(null)
 
    const [holderName, setHolderName] = useState('')
    const [cardNumber, setCardNumber] = useState('')
@@ -98,7 +107,7 @@ export const AddBankCardForm = ({userEmail, setAddBankCard}) => {
          method:'post',
          url:'http://localhost:3000/add_card',
          data:{
-            email: userEmail,
+            email,
             cardNumber:cardNumber.trim(),
             holderName:holderName.trim(),
             bankName: 
@@ -118,6 +127,7 @@ export const AddBankCardForm = ({userEmail, setAddBankCard}) => {
          if(result.data.message === 'Вы успешно привязали карту'){
             setAddBankCard(false)
             localStorage.setItem('AiW_Credit_Card', `${cardNumber.trim()}` )
+            setCreditCard(localStorage.getItem('AiW_Credit_Card'))
          }
       })
       .then(

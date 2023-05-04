@@ -2,8 +2,11 @@ const {Schema, model} = require('mongoose')
 
 const UserSchema = new Schema({
    name:String,
+   
    email:String,
+
    password: String,
+
    tickets:[{
       name: String,
       personNumber: Number,
@@ -11,10 +14,18 @@ const UserSchema = new Schema({
       dateCome:Date,
       price: Number
    }], 
+
    photo: {
       data: Buffer,
       contentType: String
    },
+
+   confirmed: Boolean,
+
+   checkNumber: Number,
+
+   resetPasswordCode: Number,
+
    creditCards: [{
       cardNumber: Number,
       holderName: String,

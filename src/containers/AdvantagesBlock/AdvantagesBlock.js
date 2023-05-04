@@ -24,6 +24,7 @@ export default function Advantages() {
 					title="Огромный выбор"
 					subtitle={FIRST_ITEM_TEXT}
 					img={planet}
+					animation={'fadeIn'}
 				/>
 				<AdvantagesItem
 					title="Надежность"

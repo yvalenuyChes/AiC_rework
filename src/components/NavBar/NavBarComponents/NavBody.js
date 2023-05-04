@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { Modal } from '@mui/material';
+import { Backdrop, Modal } from '@mui/material';
 import Cookies from 'universal-cookie'
 import Link from 'next/link'
 import { MainPageTransitions, OrderTicketTransition } from './NavLinks'
@@ -78,7 +78,16 @@ export default function NavBody() {
 					>Авторизация</div>
 				}				
 					<Modal
+					
+						disablePortal
 						open={popupOpen}
+						slots={{ backdrop: Backdrop }}
+						closeAfterTransition
+						slotProps={{
+						  backdrop: {
+							 timeout: 500,
+						  },
+						}}
 					>
 						<ModalBody />
 					</Modal>
